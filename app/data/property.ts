@@ -1,4 +1,4 @@
-export const SITE_URL = "https://437heliotrope.com";
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://437heliotrope.com").replace(/\/$/, "");
 export const SITE_NAME = "437 Heliotrope — Corona del Mar Duplex";
 export const ADDRESS = "437 Heliotrope Avenue, Corona del Mar, CA 92625";
 export const SHORT_ADDRESS = "437 Heliotrope";
@@ -22,7 +22,7 @@ export const PROPERTY = {
 };
 
 export const snapshotStats = [
-  { label: "Living area", value: "2,499 SF", sub: "two-unit coastal compound", numeric: 2499, format: "int" },
+  { label: "Living area", value: "2,499 SF", sub: "two-residence coastal compound", numeric: 2499, format: "int" },
   { label: "Total area", value: "3,485 SF", sub: "including enclosed and support spaces", numeric: 3485, format: "int" },
   { label: "Residences", value: "2", sub: "Unit A + Unit B flexibility", numeric: 2, format: "int" },
   { label: "Bedrooms", value: "4", sub: "across the duplex program", numeric: 4, format: "int" },

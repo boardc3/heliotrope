@@ -174,7 +174,7 @@ export function NeighborhoodMap() {
   };
 
   return (
-    <section id="map" className="relative bg-pearl section-pad">
+    <section className="relative bg-pearl section-pad">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
@@ -190,7 +190,7 @@ export function NeighborhoodMap() {
         </div>
 
         <div className="mt-12 grid gap-4 lg:grid-cols-[360px_1fr]">
-          <aside className="flex h-[680px] flex-col rounded-sm border border-line bg-bone">
+          <aside className="flex h-[520px] flex-col rounded-sm border border-line bg-bone lg:h-[680px]">
             <div className="flex flex-wrap gap-1.5 border-b border-line p-4">
               {categories.map((cat) => (
                 <button
@@ -233,7 +233,7 @@ export function NeighborhoodMap() {
             </div>
           </aside>
 
-          <div className="relative h-[680px] overflow-hidden rounded-sm border border-line bg-bone">
+          <div className="relative h-[520px] overflow-hidden rounded-sm border border-line bg-bone lg:h-[680px]">
             <div ref={mapNode} className="absolute inset-0" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(19,17,14,.18)_100%)]" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4">

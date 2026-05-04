@@ -3,9 +3,16 @@ import { ADDRESS, PROPERTY, SHORT_ADDRESS, SITE_NAME } from "../data/property";
 export function listingJsonLd(siteUrl: string) {
   const images = [
     `${siteUrl}/img/exterior/ext-02-1920.jpg`,
+    `${siteUrl}/img/exterior/ext-01-1920.jpg`,
     `${siteUrl}/img/great-room/gr-01-1920.jpg`,
+    `${siteUrl}/img/great-room/gr-02-1920.jpg`,
     `${siteUrl}/img/kitchen/kt-03-1920.jpg`,
+    `${siteUrl}/img/kitchen/kt-04-1920.jpg`,
+    `${siteUrl}/img/dining/dn-05-1920.jpg`,
+    `${siteUrl}/img/dining/dn-06-1920.jpg`,
     `${siteUrl}/img/adu/adu-01-1920.jpg`,
+    `${siteUrl}/img/stills/aerial-01-1920.jpg`,
+    `${siteUrl}/img/stills/village-01-1920.jpg`,
   ];
 
   return {
@@ -19,25 +26,35 @@ export function listingJsonLd(siteUrl: string) {
         description:
           "A cinematic showcase for 437 Heliotrope Avenue, a two-residence Corona del Mar property positioned for refined coastal living, income flexibility, and walkable village access.",
         datePosted: "2026-05-03",
-        image: images,
         url: siteUrl,
+        image: images,
+        mainEntityOfPage: { "@id": `${siteUrl}/#webpage` },
         about: { "@id": `${siteUrl}/#residence` },
       },
       {
         "@type": "SingleFamilyResidence",
         "@id": `${siteUrl}/#residence`,
         name: SHORT_ADDRESS,
+        url: siteUrl,
         numberOfBedrooms: PROPERTY.bedrooms,
         numberOfBathroomsTotal: PROPERTY.bathrooms,
         floorSize: { "@type": "QuantitativeValue", value: PROPERTY.livingArea, unitText: "SQFT" },
         lotSize: { "@type": "QuantitativeValue", value: PROPERTY.lotAcres, unitText: "AC" },
-        amenityFeature: ["Duplex", "Unit B", "Village walkability", "Coastal proximity", "Aerial context"].map((name) => ({
-          "@type": "LocationFeatureSpecification",
-          name,
-          value: true,
-        })),
+        amenityFeature: [
+          "Two residences",
+          "Unit B flexibility",
+          "Village walkability",
+          "Coastal proximity",
+          "Aerial context",
+        ].map((name) => ({ "@type": "LocationFeatureSpecification", name, value: true })),
         address: { "@id": `${siteUrl}/#place` },
+        geo: { "@type": "GeoCoordinates", latitude: PROPERTY.coords[1], longitude: PROPERTY.coords[0] },
         photo: images.map((url) => ({ "@type": "ImageObject", url })),
+        containedInPlace: {
+          "@type": "Place",
+          name: "Corona del Mar",
+          containedInPlace: { "@type": "City", name: "Newport Beach" },
+        },
       },
       {
         "@type": "Place",
@@ -60,6 +77,7 @@ export function listingJsonLd(siteUrl: string) {
         name: SITE_NAME,
         url: siteUrl,
         inLanguage: "en-US",
+        publisher: { "@type": "Organization", name: SITE_NAME, url: siteUrl },
       },
       {
         "@type": "WebPage",
@@ -69,6 +87,7 @@ export function listingJsonLd(siteUrl: string) {
         isPartOf: { "@id": `${siteUrl}/#website` },
         primaryImageOfPage: { "@type": "ImageObject", url: images[0] },
         breadcrumb: { "@id": `${siteUrl}/#breadcrumbs` },
+        inLanguage: "en-US",
       },
       {
         "@type": "BreadcrumbList",

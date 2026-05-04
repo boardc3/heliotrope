@@ -14,7 +14,6 @@ const clips = [
 
 function AutoVideo({ index }: { index: number }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const posterIndex = index === 5 ? 7 : index + 1;
 
   useEffect(() => {
     const video = ref.current;
@@ -35,7 +34,7 @@ function AutoVideo({ index }: { index: number }) {
       ref={ref}
       className="h-full w-full object-cover"
       src={`/video/clips/fl${index + 1}.mp4`}
-      poster={`/img/posters/clips/fl${posterIndex}.jpg`}
+      poster={`/img/posters/clips/fl${index + 1}.jpg`}
       muted
       loop
       playsInline

@@ -7,7 +7,7 @@ import { Hero } from "./components/Hero";
 import { Inquiry } from "./components/Inquiry";
 import { InteriorGallery } from "./components/InteriorGallery";
 import { LifestyleClips } from "./components/LifestyleClips";
-import { NeighborhoodMap } from "./components/NeighborhoodMap";
+import { NeighborhoodMapLoader } from "./components/NeighborhoodMapLoader";
 import { SmoothScroll } from "./components/SmoothScroll";
 import { Snapshot } from "./components/Snapshot";
 
@@ -24,7 +24,7 @@ export default function Home() {
         <Aerial />
         <Adu />
         <FullGallery />
-        <NeighborhoodMap />
+        <NeighborhoodMapLoader />
         <Inquiry />
       </main>
       <Footer />
