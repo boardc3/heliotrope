@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import "mapbox-gl/dist/mapbox-gl.css";
 import "./globals.css";
 import { ADDRESS, PROPERTY, SHORT_ADDRESS, SITE_NAME, SITE_URL } from "./data/property";
 import { listingJsonLd } from "./lib/jsonLd";

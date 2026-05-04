@@ -1,6 +1,5 @@
 "use client";
 
-import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categoryColors, categoryLabels, googleMapsUrl, PoiCategory, pois, propertyMarker } from "../data/poi";
@@ -59,6 +58,8 @@ export function NeighborhoodMap() {
   const markers = useRef<Record<string, mapboxgl.Marker>>({});
   const [filter, setFilter] = useState<"all" | PoiCategory>("all");
   const [active, setActive] = useState(pois[0].id);
+  const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
+  const [mapMessage, setMapMessage] = useState("Loading live neighborhood map...");
 
   const filtered = useMemo(() => pois.filter((poi) => filter === "all" || poi.category === filter), [filter]);
 
@@ -68,7 +69,7 @@ export function NeighborhoodMap() {
     try {
       map = new mapboxgl.Map({
         container: mapNode.current,
-        style: "mapbox://styles/mapbox/light-v11",
+        style: "mapbox://styles/mapbox/streets-v12",
         center: propertyMarker.coords,
         zoom: 12.7,
         pitch: 44,
@@ -84,42 +85,46 @@ export function NeighborhoodMap() {
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false, visualizePitch: false }), "top-right");
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-left");
 
+    let hasLoaded = false;
+    map.on("load", () => {
+      hasLoaded = true;
+      map.resize();
+      setMapState("ready");
+    });
+    map.on("error", (event) => {
+      if (hasLoaded) return;
+      const message = event.error?.message || "Mapbox could not load this map.";
+      console.error("Mapbox runtime error", message);
+      setMapMessage(message);
+      setMapState("error");
+    });
+    const resizeObserver = new ResizeObserver(() => map.resize());
+    if (mapNode.current) resizeObserver.observe(mapNode.current);
+
     map.on("style.load", () => {
-      for (const layer of map.getStyle().layers ?? []) {
-        try {
-          if (layer.type === "symbol" && layer.id.includes("label")) {
-            map.setLayoutProperty(layer.id, "visibility", "none");
-          }
-          if (layer.type === "fill" && layer.id.includes("water")) {
-            map.setPaintProperty(layer.id, "fill-color", "#C8D6DA");
-          }
-          if (layer.type === "background") {
-            map.setPaintProperty(layer.id, "background-color", "#EFE5D0");
-          }
-          if (layer.type === "fill" && (layer.id.includes("park") || layer.id.includes("grass"))) {
-            map.setPaintProperty(layer.id, "fill-color", "#D4D9C5");
-          }
-          if (layer.type === "line" && layer.id.includes("road")) {
-            map.setPaintProperty(layer.id, "line-color", "#D8CAAE");
-          }
-        } catch {
-          // Mapbox layer availability varies by style revision; keep the custom map resilient.
-        }
+      try {
+        map.setFog({
+          color: "#F4EEDF",
+          "high-color": "#C8D6DA",
+          "horizon-blend": 0.08,
+        });
+        map.addLayer({
+          id: "3d-buildings",
+          source: "composite",
+          "source-layer": "building",
+          filter: ["==", "extrude", "true"],
+          type: "fill-extrusion",
+          minzoom: 14.5,
+          paint: {
+            "fill-extrusion-color": "#DBCFB7",
+            "fill-extrusion-height": ["get", "height"],
+            "fill-extrusion-base": ["get", "min_height"],
+            "fill-extrusion-opacity": 0.35,
+          },
+        });
+      } catch (error) {
+        console.warn("Non-critical map styling failed", error);
       }
-      map.addLayer({
-        id: "3d-buildings",
-        source: "composite",
-        "source-layer": "building",
-        filter: ["==", "extrude", "true"],
-        type: "fill-extrusion",
-        minzoom: 14.5,
-        paint: {
-          "fill-extrusion-color": "#DBCFB7",
-          "fill-extrusion-height": ["get", "height"],
-          "fill-extrusion-base": ["get", "min_height"],
-          "fill-extrusion-opacity": 0.4,
-        },
-      });
     });
 
     const prop = document.createElement("button");
@@ -172,7 +177,12 @@ export function NeighborhoodMap() {
       markers.current[poi.id] = new mapboxgl.Marker({ element: el }).setLngLat(poi.coords).setPopup(popup).addTo(map);
     });
 
-    return () => map.remove();
+    return () => {
+      resizeObserver.disconnect();
+      map.remove();
+      mapRef.current = null;
+      markers.current = {};
+    };
   }, []);
 
   useEffect(() => {
@@ -272,6 +282,16 @@ export function NeighborhoodMap() {
 
           <div className="relative h-[520px] overflow-hidden rounded-sm border border-line bg-bone lg:h-[680px]">
             <div ref={mapNode} className="absolute inset-0" />
+            {mapState !== "ready" ? (
+              <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-bone/80 text-center backdrop-blur-[2px]">
+                <div className="max-w-sm px-6">
+                  <p className="eyebrow-plain text-ink/45">
+                    {mapState === "error" ? "Map unavailable" : "Loading Mapbox"}
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-ink/62">{mapMessage}</p>
+                </div>
+              </div>
+            ) : null}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(19,17,14,.18)_100%)]" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4">
               <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-line bg-bone/95 px-4 py-2 text-[0.6rem] font-medium uppercase tracking-widest3 text-ink/65 shadow-[0_18px_40px_-15px_rgba(19,17,14,0.4)]">
