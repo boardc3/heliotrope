@@ -20,6 +20,10 @@ export function Lightbox({
   const [zoom, setZoom] = useState(1);
 
   useEffect(() => {
+    setZoom(1);
+  }, [index]);
+
+  useEffect(() => {
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -37,25 +41,31 @@ export function Lightbox({
   }, [index, items.length, onClose, onMove]);
 
   return (
-    <div className="fixed inset-0 z-[100] bg-ink/95 p-4 text-bone backdrop-blur-xl md:p-7">
-      <div className="flex items-center justify-between font-mono text-xs uppercase tracking-wider2 text-bone/70">
-        <span>
+    <div className="fixed inset-0 z-[100] flex flex-col bg-ink/96 p-4 text-bone backdrop-blur-2xl md:p-8">
+      <div className="flex items-center justify-between text-[0.62rem] font-medium uppercase tracking-widest3 text-bone/65">
+        <span className="tabular">
           {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
         </span>
-        <button onClick={onClose} className="rounded-full border border-bone/20 px-4 py-2" aria-label="Close gallery">
+        <span className="hidden md:inline">{item.category}</span>
+        <button
+          onClick={onClose}
+          className="rounded-full border border-bone/22 px-4 py-2 transition hover:border-bone hover:text-bone"
+          aria-label="Close gallery"
+        >
           Close
         </button>
       </div>
-      <div className="relative mt-5 flex h-[calc(100vh-9rem)] items-center justify-center overflow-hidden rounded-[2rem] bg-bone/5">
+
+      <div className="relative mt-6 flex flex-1 items-center justify-center overflow-hidden rounded-sm bg-bone/5">
         <AnimatePresence mode="wait">
           <motion.div
             key={item.id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, scale: zoom }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.45 }}
             onDoubleClick={() => setZoom((value) => (value > 1 ? 1 : 2.2))}
-            className="h-full w-full cursor-zoom-in"
+            className="flex h-full w-full cursor-zoom-in items-center justify-center"
           >
             <Picture
               bucket={item.bucket}
@@ -67,23 +77,51 @@ export function Lightbox({
             />
           </motion.div>
         </AnimatePresence>
-        <button className="absolute left-4 top-1/2 rounded-full bg-ink/65 px-4 py-3" onClick={() => onMove((index - 1 + items.length) % items.length)} aria-label="Previous image">
-          Prev
+
+        <button
+          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-bone/22 bg-ink/55 px-3 py-3 text-sm transition hover:border-bone md:left-6"
+          onClick={() => onMove((index - 1 + items.length) % items.length)}
+          aria-label="Previous image"
+        >
+          ←
         </button>
-        <button className="absolute right-4 top-1/2 rounded-full bg-ink/65 px-4 py-3" onClick={() => onMove((index + 1) % items.length)} aria-label="Next image">
-          Next
+        <button
+          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-bone/22 bg-ink/55 px-3 py-3 text-sm transition hover:border-bone md:right-6"
+          onClick={() => onMove((index + 1) % items.length)}
+          aria-label="Next image"
+        >
+          →
         </button>
       </div>
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+
+      <div className="mt-5 flex flex-wrap items-end justify-between gap-4 text-bone">
         <div>
-          <p className="font-mono text-[0.65rem] uppercase tracking-wider2 text-copper">{item.category}</p>
-          <h3 className="font-display text-3xl tracking-[-0.04em]">{item.title}</h3>
+          <p className="text-[0.6rem] font-medium uppercase tracking-widest3 text-ember">{item.category}</p>
+          <h3 className="mt-1 font-display text-2xl font-light tracking-[-0.025em]">{item.title}</h3>
           <p className="text-sm text-bone/62">{item.meta}</p>
         </div>
-        <div className="flex gap-2 font-mono text-xs uppercase tracking-wider2">
-          <button onClick={() => setZoom(Math.max(1, zoom - 0.25))}>-</button>
-          <button onClick={() => setZoom(1)}>Reset</button>
-          <button onClick={() => setZoom(Math.min(3, zoom + 0.25))}>+</button>
+        <div className="flex gap-1.5 text-[0.62rem] font-medium uppercase tracking-widest3">
+          <button
+            onClick={() => setZoom(Math.max(1, zoom - 0.25))}
+            className="rounded-full border border-bone/22 px-3 py-2 transition hover:border-bone"
+            aria-label="Zoom out"
+          >
+            −
+          </button>
+          <button
+            onClick={() => setZoom(1)}
+            className="rounded-full border border-bone/22 px-3 py-2 transition hover:border-bone"
+            aria-label="Reset zoom"
+          >
+            Reset
+          </button>
+          <button
+            onClick={() => setZoom(Math.min(3, zoom + 0.25))}
+            className="rounded-full border border-bone/22 px-3 py-2 transition hover:border-bone"
+            aria-label="Zoom in"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>

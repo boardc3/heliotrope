@@ -12,52 +12,68 @@ export function FullGallery() {
   const items = useMemo(() => galleryItems.filter((item) => filter === "All" || item.category === filter), [filter]);
 
   return (
-    <section id="gallery" className="section-pad bg-bone">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+    <section id="gallery" className="relative bg-bone section-pad">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">Full Gallery</span>
-            <h2 className="mt-5 max-w-3xl font-display text-5xl leading-[0.96] tracking-[-0.055em] md:text-7xl">
-              Every angle, still, and material cue.
+            <span className="eyebrow">07 — Full Gallery</span>
+            <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
+              Every angle, still, and <span className="italic">material</span> cue.
             </h2>
           </div>
-          <div className="flex max-w-3xl flex-wrap gap-2">
-            {filters.map((item) => (
-              <button
-                key={item}
-                onClick={() => setFilter(item)}
-                className={`rounded-full border px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] transition ${filter === item ? "border-ink bg-ink text-bone" : "border-ink/10 text-ink/65 hover:border-ink/30"}`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
+          <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
+            Filter through the renders and editorial stills pulled from the cinematic and aerial source material. Open
+            any image for the lightbox—keyboard, swipe, and zoom supported.
+          </p>
         </div>
+
+        <div className="mt-10 flex flex-wrap gap-2">
+          {filters.map((item) => (
+            <button
+              key={item}
+              onClick={() => setFilter(item)}
+              className={`rounded-full border px-4 py-2 text-[0.62rem] font-medium uppercase tracking-widest3 transition ${
+                filter === item
+                  ? "border-ink bg-ink text-bone"
+                  : "border-line text-ink/60 hover:border-ink/30 hover:text-ink"
+              }`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+
         <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
           {items.map((item, index) => (
             <motion.button
               layout
               key={item.id}
               onClick={() => setOpenIndex(index)}
-              className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-[1.75rem] bg-ink text-left"
+              className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-sm bg-ink text-left"
             >
               <Picture
                 bucket={item.bucket}
                 slug={item.slug}
                 alt={item.alt}
                 className="block w-full"
-                imgClassName="w-full object-cover transition duration-[1200ms] group-hover:scale-[1.04]"
+                imgClassName="w-full object-cover transition duration-[1400ms] ease-[var(--soft)] group-hover:scale-[1.04]"
                 widths={item.bucket === "stills" ? [1280, 1920] : undefined}
               />
-              <span className="block bg-ink p-4 text-bone">
-                <span className="font-mono text-[0.62rem] uppercase tracking-wider2 text-bone/55">{item.category}</span>
-                <span className="mt-1 block font-display text-2xl tracking-[-0.04em]">{item.title}</span>
+              <span className="block bg-ink px-5 py-4 text-bone">
+                <span className="text-[0.6rem] font-medium uppercase tracking-widest3 text-bone/55">
+                  {item.category}
+                </span>
+                <span className="mt-1.5 block font-display text-xl font-light tracking-[-0.025em]">
+                  {item.title}
+                </span>
               </span>
             </motion.button>
           ))}
         </div>
       </div>
-      {openIndex !== null ? <Lightbox items={items} index={openIndex} onClose={() => setOpenIndex(null)} onMove={setOpenIndex} /> : null}
+      {openIndex !== null ? (
+        <Lightbox items={items} index={openIndex} onClose={() => setOpenIndex(null)} onMove={setOpenIndex} />
+      ) : null}
     </section>
   );
 }

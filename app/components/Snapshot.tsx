@@ -13,11 +13,11 @@ function Counter({ value, format }: { value: number; format: "int" | "decimal" |
   });
 
   useEffect(() => {
-    const controls = animate(motionValue, value, { duration: 1.6, ease: [0.16, 1, 0.3, 1] });
+    const controls = animate(motionValue, value, { duration: 2.0, ease: [0.16, 1, 0.3, 1] });
     return controls.stop;
   }, [motionValue, value]);
 
-  return <motion.span>{display}</motion.span>;
+  return <motion.span className="tabular">{display}</motion.span>;
 }
 
 export function Snapshot() {
@@ -25,34 +25,39 @@ export function Snapshot() {
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <section ref={ref} className="section-pad bg-bone">
-      <div className="mx-auto max-w-7xl">
-        <span className="eyebrow">The Snapshot</span>
-        <div className="mt-5 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-          <h2 className="font-display text-5xl leading-[0.95] tracking-[-0.055em] md:text-7xl">
-            A rare CdM address with a flexible two-residence program.
-          </h2>
-          <p className="max-w-2xl text-lg leading-8 text-ink/70">
-            Public listing data identifies the property as a 4-bedroom, 3-bath duplex with roughly 2,499 square feet
-            of living area and 3,485 square feet total. The opportunity is the mix: village proximity, separate-unit
-            optionality, and a crisp design direction already visualized in the asset package.
-          </p>
+    <section ref={ref} className="relative bg-bone section-pad">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="grid gap-12 lg:grid-cols-[0.55fr_1fr] lg:items-end">
+          <div>
+            <span className="eyebrow">01 — The Snapshot</span>
+            <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
+              A rare CdM address with a flexible <span className="italic">two-residence</span> program.
+            </h2>
+          </div>
+          <div className="lg:pb-3">
+            <p className="max-w-xl text-base leading-[1.75] text-ink/68 md:text-[1.05rem]">
+              Public listing data describes the property as a four-bedroom, three-bath duplex with roughly 2,499 square
+              feet of living area on a tightly held block of Heliotrope Avenue. The opportunity is the mix:
+              village proximity, separate-unit optionality, and a clear design direction.
+            </p>
+          </div>
         </div>
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+        <div className="mt-16 grid grid-cols-2 divide-x divide-y divide-line border-y border-line lg:grid-cols-3">
           {snapshotStats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.75, delay: index * 0.06 }}
-              className="rounded-[2rem] border border-ink/10 bg-pearl/65 p-7"
+              transition={{ duration: 0.9, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative flex flex-col gap-4 p-7 md:p-9"
             >
-              <p className="font-mono text-[0.68rem] uppercase tracking-wider2 text-surf">{stat.label}</p>
-              <p className="mt-5 font-display text-5xl tracking-[-0.05em]">
+              <span className="eyebrow-plain text-ink/58">{stat.label}</span>
+              <p className="font-display text-[clamp(2.8rem,5vw,4rem)] font-light leading-none tracking-[-0.04em] text-ink">
                 {inView && stat.numeric ? <Counter value={stat.numeric} format={stat.format} /> : stat.value}
-                {stat.value.includes("SF") ? " SF" : ""}
+                {stat.value.includes("SF") ? <span className="ml-2 text-base align-middle text-ink/50">SF</span> : null}
               </p>
-              <p className="mt-3 text-sm leading-6 text-ink/62">{stat.sub}</p>
+              <p className="text-sm leading-6 text-ink/60">{stat.sub}</p>
             </motion.div>
           ))}
         </div>

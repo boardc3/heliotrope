@@ -1,21 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { ADDRESS, PROPERTY, SHORT_ADDRESS, SITE_NAME, SITE_URL } from "./data/property";
 import { listingJsonLd } from "./lib/jsonLd";
 
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap" });
-const inter = Inter_Tight({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  style: ["normal", "italic"],
+  axes: ["SOFT", "opsz"],
+});
 
-const title = `${ADDRESS} · Corona del Mar Duplex Reimagined`;
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  weight: ["300", "400", "500"],
+});
+
+const title = `${ADDRESS} · A Corona del Mar Duplex Reimagined`;
 const description =
   "A cinematic showcase for 437 Heliotrope Avenue in Corona del Mar: a two-residence coastal property with village walkability, refined redesign potential, and Newport Beach context.";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FAF6EC" },
-    { media: "(prefers-color-scheme: dark)", color: "#0E1A24" },
+    { media: "(prefers-color-scheme: light)", color: "#F4EEDF" },
+    { media: "(prefers-color-scheme: dark)", color: "#13110E" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -77,7 +88,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${mono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.mapbox.com" crossOrigin="" />
         <link rel="preconnect" href="https://events.mapbox.com" crossOrigin="" />
@@ -88,10 +99,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(listingJsonLd(SITE_URL)) }}
         />
       </head>
-      <body>
+      <body className="font-sans antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-bone focus:px-4 focus:py-3 focus:font-mono focus:text-xs focus:uppercase focus:tracking-wider2"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-bone focus:px-4 focus:py-3 focus:text-xs focus:uppercase focus:tracking-wider2"
         >
           Skip to content
         </a>

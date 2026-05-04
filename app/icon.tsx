@@ -6,8 +6,21 @@ export const contentType = "image/png";
 export default function Icon() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#0E1A24", color: "#B8693C", fontSize: 20 }}>
-        H
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#13110E",
+          color: "#A85A2F",
+          fontSize: 18,
+          fontFamily: "serif",
+          fontStyle: "italic",
+        }}
+      >
+        h
       </div>
     ),
     size,

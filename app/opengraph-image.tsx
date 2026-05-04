@@ -15,23 +15,26 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: 72,
-          color: "#FAF6EC",
-          background: "linear-gradient(135deg,#0E1A24 0%,#2D5566 58%,#B8693C 100%)",
+          padding: 80,
+          color: "#F4EEDF",
+          background: "linear-gradient(135deg,#13110E 0%,#1C1916 45%,#2C4A55 78%,#A85A2F 100%)",
         }}
       >
-        <div style={{ display: "flex", fontSize: 22, letterSpacing: 7, textTransform: "uppercase" }}>Corona del Mar · 92625</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 18, letterSpacing: 8, textTransform: "uppercase", color: "rgba(244,238,223,.78)" }}>
+          <span style={{ display: "flex" }}>Corona del Mar · 92625</span>
+          <span style={{ display: "flex" }}>MLS LG25048387</span>
+        </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 104, lineHeight: 0.9, letterSpacing: -7 }}>{SHORT_ADDRESS}.</div>
-          <div style={{ display: "flex", marginTop: 26, fontSize: 34, color: "rgba(250,246,236,.78)" }}>
-            Village energy. Ocean air. Two-residence flexibility.
+          <div style={{ display: "flex", fontSize: 124, lineHeight: 0.9, letterSpacing: -7 }}>437 Heliotrope.</div>
+          <div style={{ display: "flex", marginTop: 28, fontSize: 32, color: "rgba(244,238,223,.82)", fontStyle: "italic" }}>
+            A village address, one block from the sea.
           </div>
         </div>
-        <div style={{ display: "flex", gap: 24, fontSize: 22 }}>
-          <span>2,499 SF</span>
-          <span>4 BR</span>
-          <span>3 BA</span>
-          <span>Duplex</span>
+        <div style={{ display: "flex", gap: 36, fontSize: 22, color: "rgba(244,238,223,.78)" }}>
+          <span style={{ display: "flex" }}>2,499 SF</span>
+          <span style={{ display: "flex" }}>4 BR</span>
+          <span style={{ display: "flex" }}>3 BA</span>
+          <span style={{ display: "flex" }}>Duplex</span>
         </div>
       </div>
     ),

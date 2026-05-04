@@ -12,9 +12,24 @@ export function ExteriorConfigurator() {
 
   useEffect(() => {
     if (touched) return;
-    const timer = window.setInterval(() => setActive((value) => (value + 1) % finishSchemes.length), 9000);
+    const timer = window.setInterval(() => setActive((value) => (value + 1) % finishSchemes.length), 9500);
     return () => window.clearInterval(timer);
   }, [touched]);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        setTouched(true);
+        setActive((value) => (value + 1) % finishSchemes.length);
+      }
+      if (event.key === "ArrowLeft") {
+        setTouched(true);
+        setActive((value) => (value - 1 + finishSchemes.length) % finishSchemes.length);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const choose = (index: number) => {
     setTouched(true);
@@ -22,29 +37,30 @@ export function ExteriorConfigurator() {
   };
 
   return (
-    <section id="vision" className="section-pad bg-pearl">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-10 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+    <section id="vision" className="relative bg-pearl section-pad">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">Exterior Vision</span>
-            <h2 className="mt-5 font-display text-5xl leading-[0.96] tracking-[-0.055em] md:text-7xl">
-              From village shell to contemporary CdM.
+            <span className="eyebrow">02 — Exterior Vision</span>
+            <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
+              From village shell to a <span className="italic">contemporary</span> CdM facade.
             </h2>
           </div>
-          <p className="max-w-2xl text-lg leading-8 text-ink/68">
-            The assets show the property as it stands and the sharper coastal direction it can take. Toggle between
-            the two states to feel how much presence the same Heliotrope address can carry.
+          <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
+            The assets show the property as it stands and the sharper coastal direction it can take. Toggle between the
+            two states to feel how much presence the same Heliotrope address can carry.
           </p>
         </div>
-        <div className="grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
-          <div className="relative min-h-[62vw] overflow-hidden rounded-[2.25rem] bg-ink shadow-2xl shadow-ink/20 lg:min-h-[650px]">
-            <AnimatePresence mode="wait">
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-[1.5fr_0.55fr]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-ink shadow-[0_50px_120px_-40px_rgba(19,17,14,0.55)] lg:aspect-[16/11]">
+            <AnimatePresence mode="popLayout">
               <motion.div
                 key={scheme.id}
-                initial={{ opacity: 0, scale: 1.02 }}
+                initial={{ opacity: 0, scale: 1.04 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.01 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute inset-0"
               >
                 <Picture
@@ -57,46 +73,68 @@ export function ExteriorConfigurator() {
                 />
               </motion.div>
             </AnimatePresence>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent p-6 text-bone md:p-8">
-              <p className="font-mono text-xs uppercase tracking-wider2 text-bone/70">{scheme.number}</p>
-              <h3 className="mt-2 font-display text-4xl tracking-[-0.04em]">{scheme.name}</h3>
-              <div className="mt-4 flex gap-2">
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(19,17,14,.78)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 text-bone md:p-9">
+              <div>
+                <p className="text-[0.62rem] font-medium uppercase tracking-widest3 text-bone/65">Scheme {scheme.number}</p>
+                <h3 className="mt-2 font-display text-[clamp(1.8rem,2.6vw,2.4rem)] font-light tracking-[-0.025em]">
+                  {scheme.name}
+                </h3>
+              </div>
+              <div className="hidden gap-1.5 md:flex">
                 {scheme.swatches.map((swatch) => (
-                  <span key={swatch} className="h-6 w-6 rounded-full border border-bone/40" style={{ background: swatch }} />
+                  <span
+                    key={swatch}
+                    className="h-7 w-7 rounded-full border border-bone/40 shadow-inner"
+                    style={{ background: swatch }}
+                  />
                 ))}
               </div>
             </div>
           </div>
-          <aside className="rounded-[2.25rem] bg-bone p-7 lg:p-8">
+
+          <aside className="flex flex-col justify-between gap-8 rounded-sm bg-bone p-7 md:p-9">
             <AnimatePresence mode="wait">
               <motion.div
                 key={scheme.id}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.55 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.6 }}
               >
-                <span className="eyebrow">Scheme {scheme.number}</span>
-                <h3 className="mt-4 font-display text-4xl leading-none tracking-[-0.045em]">{scheme.name}</h3>
-                <p className="mt-5 leading-7 text-ink/68">{scheme.blurb}</p>
-                <div className="mt-7 flex flex-wrap gap-2">
+                <span className="eyebrow-plain text-ink/55">Scheme {scheme.number}</span>
+                <h3 className="mt-4 font-display text-[clamp(1.9rem,2.6vw,2.4rem)] font-light leading-tight tracking-[-0.03em]">
+                  {scheme.name}
+                </h3>
+                <p className="mt-5 text-[0.95rem] leading-[1.7] text-ink/68">{scheme.blurb}</p>
+                <ul className="mt-7 grid gap-2.5">
                   {scheme.materials.map((material) => (
-                    <span key={material} className="rounded-full border border-ink/10 px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-ink/70">
+                    <li key={material} className="flex items-baseline gap-3 text-sm text-ink/70">
+                      <span className="h-px w-4 bg-ink/25" />
                       {material}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </motion.div>
             </AnimatePresence>
-            <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 border-t border-line pt-6">
               {finishSchemes.map((item, index) => (
                 <button
                   key={item.id}
                   onClick={() => choose(index)}
-                  className={`rounded-2xl border p-4 text-left transition ${active === index ? "border-copper bg-pearl" : "border-ink/10 bg-transparent hover:border-ink/25"}`}
+                  aria-pressed={active === index}
+                  className={`group flex flex-col gap-2 rounded-sm border p-4 text-left transition ${
+                    active === index
+                      ? "border-ink bg-ink text-bone"
+                      : "border-line text-ink/72 hover:border-ink/40"
+                  }`}
                 >
-                  <span className="font-mono text-[0.65rem] uppercase tracking-wider2 text-surf">{item.number}</span>
-                  <span className="mt-2 block font-display text-xl tracking-[-0.035em]">{item.name}</span>
+                  <span className="text-[0.6rem] font-medium uppercase tracking-widest3 opacity-70">
+                    Scheme {item.number}
+                  </span>
+                  <span className="font-display text-lg font-light leading-tight tracking-tight">
+                    {item.name}
+                  </span>
                 </button>
               ))}
             </div>
