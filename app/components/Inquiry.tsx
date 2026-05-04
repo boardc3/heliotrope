@@ -52,7 +52,7 @@ export function Inquiry() {
         </div>
 
         <form
-          action={`mailto:?subject=${subject}`}
+          action={`mailto:mpatel@omnilocal.ai?subject=${subject}`}
           className="flex flex-col gap-5 rounded-sm border border-bone/12 bg-bone/[0.06] p-7 backdrop-blur-2xl md:p-9"
         >
           <h3 className="font-display text-2xl font-light tracking-[-0.025em] text-bone">Request the package</h3>
