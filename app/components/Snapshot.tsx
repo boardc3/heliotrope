@@ -54,7 +54,11 @@ export function Snapshot() {
             >
               <span className="eyebrow-plain text-ink/58">{stat.label}</span>
               <p className="font-display text-[clamp(2.8rem,5vw,4rem)] font-light leading-none tracking-[-0.04em] text-ink">
-                {inView && stat.numeric ? <Counter value={stat.numeric} format={stat.format} /> : stat.value}
+                {inView && stat.numeric ? (
+                  <Counter value={stat.numeric} format={stat.format} />
+                ) : (
+                  stat.value.replace(/\s*SF$/, "")
+                )}
                 {stat.value.includes("SF") ? <span className="ml-2 text-base align-middle text-ink/50">SF</span> : null}
               </p>
               <p className="text-sm leading-6 text-ink/60">{stat.sub}</p>

@@ -5,7 +5,8 @@ import mapboxgl from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categoryColors, categoryLabels, PoiCategory, pois, propertyMarker } from "../data/poi";
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
+if (MAPBOX_TOKEN) mapboxgl.accessToken = MAPBOX_TOKEN;
 
 const categories: ("all" | PoiCategory)[] = ["all", "beaches", "resorts", "dining", "outdoors", "culture"];
 
@@ -46,17 +47,23 @@ export function NeighborhoodMap() {
   const filtered = useMemo(() => pois.filter((poi) => filter === "all" || poi.category === filter), [filter]);
 
   useEffect(() => {
-    if (!mapNode.current || mapRef.current) return;
-    const map = new mapboxgl.Map({
-      container: mapNode.current,
-      style: "mapbox://styles/mapbox/light-v11",
-      center: propertyMarker.coords,
-      zoom: 12.7,
-      pitch: 44,
-      bearing: -14,
-      antialias: true,
-      attributionControl: false,
-    });
+    if (!mapNode.current || mapRef.current || !MAPBOX_TOKEN) return;
+    let map: mapboxgl.Map;
+    try {
+      map = new mapboxgl.Map({
+        container: mapNode.current,
+        style: "mapbox://styles/mapbox/light-v11",
+        center: propertyMarker.coords,
+        zoom: 12.7,
+        pitch: 44,
+        bearing: -14,
+        antialias: true,
+        attributionControl: false,
+      });
+    } catch (error) {
+      console.error("Mapbox failed to initialize", error);
+      return;
+    }
     mapRef.current = map;
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false, visualizePitch: false }), "top-right");
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-left");
