@@ -1,7 +1,7 @@
 "use client";
 
 import mapboxgl from "mapbox-gl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { categoryColors, categoryLabels, googleMapsUrl, PoiCategory, pois, propertyMarker } from "../data/poi";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
@@ -56,12 +56,16 @@ export function NeighborhoodMap() {
   const mapNode = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<Record<string, mapboxgl.Marker>>({});
+  const popups = useRef<Record<string, mapboxgl.Popup>>({});
   const [filter, setFilter] = useState<"all" | PoiCategory>("all");
   const [active, setActive] = useState(pois[0].id);
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
   const [mapMessage, setMapMessage] = useState("Loading live neighborhood map...");
 
   const filtered = useMemo(() => pois.filter((poi) => filter === "all" || poi.category === filter), [filter]);
+  const closePopups = useCallback(() => {
+    Object.values(popups.current).forEach((popup) => popup.remove());
+  }, []);
 
   useEffect(() => {
     if (!mapNode.current || mapRef.current || !MAPBOX_TOKEN) return;
@@ -131,16 +135,17 @@ export function NeighborhoodMap() {
     prop.className = "mv-prop-marker";
     prop.innerHTML = STAR_SVG;
     prop.setAttribute("aria-label", "437 Heliotrope");
+    prop.addEventListener("click", closePopups);
+    const propertyPopup = new mapboxgl.Popup({ offset: 32, closeButton: false, maxWidth: "300px" }).setHTML(`
+      <div style="background:#13110E;color:#F4EEDF;padding:22px 22px 20px">
+        <p style="margin:0;font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#A85A2F">The Property</p>
+        <h3 style="margin:10px 0 6px;font-family:var(--font-fraunces,serif);font-weight:300;font-size:24px;letter-spacing:-.02em">437 Heliotrope</h3>
+        <p style="margin:0;color:rgba(244,238,223,.72);font-size:14px;line-height:1.5">A two-residence Corona del Mar property in the village grid.</p>
+      </div>`);
+    popups.current.property = propertyPopup;
     new mapboxgl.Marker({ element: prop })
       .setLngLat(propertyMarker.coords)
-      .setPopup(
-        new mapboxgl.Popup({ offset: 32, closeButton: false, maxWidth: "300px" }).setHTML(`
-        <div style="background:#13110E;color:#F4EEDF;padding:22px 22px 20px">
-          <p style="margin:0;font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#A85A2F">The Property</p>
-          <h3 style="margin:10px 0 6px;font-family:var(--font-fraunces,serif);font-weight:300;font-size:24px;letter-spacing:-.02em">437 Heliotrope</h3>
-          <p style="margin:0;color:rgba(244,238,223,.72);font-size:14px;line-height:1.5">A two-residence Corona del Mar property in the village grid.</p>
-        </div>`),
-      )
+      .setPopup(propertyPopup)
       .addTo(map);
 
     pois.forEach((poi, index) => {
@@ -173,7 +178,9 @@ export function NeighborhoodMap() {
           curve: 1.6,
           easing: (t: number) => 1 - Math.pow(1 - t, 4),
         });
+        closePopups();
       });
+      popups.current[poi.id] = popup;
       markers.current[poi.id] = new mapboxgl.Marker({ element: el }).setLngLat(poi.coords).setPopup(popup).addTo(map);
     });
 
@@ -182,14 +189,16 @@ export function NeighborhoodMap() {
       map.remove();
       mapRef.current = null;
       markers.current = {};
+      popups.current = {};
     };
-  }, []);
+  }, [closePopups]);
 
   useEffect(() => {
     Object.entries(markers.current).forEach(([id, marker]) => {
       const show = filtered.some((poi) => poi.id === id);
       marker.getElement().style.display = show ? "grid" : "none";
       marker.getElement().classList.toggle("is-active", id === active);
+      if (!show) popups.current[id]?.remove();
     });
   }, [active, filtered]);
 
@@ -207,7 +216,8 @@ export function NeighborhoodMap() {
       speed: 0.85,
       curve: 1.6,
     });
-    marker.togglePopup();
+    closePopups();
+    popups.current[id]?.setLngLat(poi.coords).addTo(map);
   };
 
   return (
@@ -228,13 +238,15 @@ export function NeighborhoodMap() {
 
         <div className="mt-12 grid gap-4 lg:grid-cols-[360px_1fr]">
           <aside className="flex h-[520px] flex-col rounded-sm border border-line bg-bone lg:h-[680px]">
-            <div className="flex flex-wrap gap-1.5 border-b border-line p-4">
+            <div className="flex flex-wrap gap-2 border-b border-line p-4">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`rounded-full px-3 py-1.5 text-[0.6rem] font-medium uppercase tracking-widest3 transition ${
-                    filter === cat ? "bg-ink text-bone" : "text-ink/55 hover:text-ink"
+                  className={`inline-flex items-center justify-center rounded-full border px-3.5 py-2 text-[0.6rem] font-medium uppercase tracking-widest3 shadow-sm transition ${
+                    filter === cat
+                      ? "border-ink bg-ink text-bone shadow-[0_12px_24px_-16px_rgba(19,17,14,0.8)]"
+                      : "border-line bg-pearl/55 text-ink/62 hover:border-ink/25 hover:bg-pearl hover:text-ink"
                   }`}
                 >
                   {cat === "all" ? "All" : categoryLabels[cat]}
