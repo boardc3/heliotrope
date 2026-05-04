@@ -1,4 +1,4 @@
-import { mkdir, readdir, copyFile } from "node:fs/promises";
+import { mkdir, readdir, copyFile, stat } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
@@ -11,6 +11,9 @@ const pub = path.resolve("public");
 const imageJobs = [
   { src: path.join(assets, "Drone", "ext.png"), bucket: "exterior", slug: "ext-01", alt: "Existing street-facing elevation at 437 Heliotrope" },
   { src: path.join(assets, "Drone", "ext-after.png"), bucket: "exterior", slug: "ext-02", alt: "Reimagined exterior concept for 437 Heliotrope" },
+  { src: path.join(assets, "Additional", "hf_20260504_162305_4dde9854-d5fc-4f3b-8efd-67f1ef5f3f0a.png"), bucket: "exterior", slug: "ext-03", alt: "Reimagined deck and exterior terrace concept at 437 Heliotrope" },
+  { src: path.join(assets, "Additional", "hf_20260504_161936_365a77a6-cad3-461b-a505-390257239508.png"), bucket: "bedrooms", slug: "bed-01", alt: "Primary bedroom concept with warm millwork and terrace access" },
+  { src: path.join(assets, "Additional", "hf_20260504_162254_56d383bb-5bfd-4716-bacc-dbc9822642f5.png"), bucket: "bedrooms", slug: "bed-02", alt: "Bedroom suite concept with built-in storage and balcony access" },
   { src: path.join(assets, "Unit B", "hf_20260503_192929_96e7ab5a-592c-46b4-9550-58057c9c9292.png"), bucket: "adu", slug: "adu-01", alt: "Unit B living space with warm neutral finishes" },
 ];
 
@@ -28,7 +31,7 @@ unitAFiles.forEach((file, index) => {
 });
 
 const videoJobs = [
-  { src: path.join(assets, "helio-hero-0.0.mp4"), out: "hero-1080.mp4", poster: "hero.jpg", crf: 27, height: 1080, audio: true, posterAt: 2 },
+  { src: path.join(assets, "heliotrope-5-4.mp4"), out: "hero-1080.mp4", poster: "hero.jpg", crf: 27, height: 1080, audio: true, posterAt: 2 },
   { src: path.join(assets, "Drone", "clips", "hf_20260504_000532_cbe06e48-6c06-4509-b18e-0204c8ae4086.mp4"), out: "aerial-1080.mp4", poster: "aerial.jpg", crf: 30, height: 1080, audio: false, posterAt: 1 },
   { src: path.join(assets, "Drone", "clips", "hf_20260503_235109_11fe37a2-ee8d-4b74-a8ca-5867046262a9.mp4"), out: "aerial2-1080.mp4", poster: "aerial2.jpg", crf: 31, height: 1080, audio: false, posterAt: 2 },
 ];
@@ -41,6 +44,7 @@ const clipSources = [
   path.join(assets, "Unit B", "clips", "hf_20260503_223846_6c01e146-7ea6-4651-957e-323b2a67a038.mp4"),
   path.join(assets, "Drone", "clips", "DJI_20260502170438_0222_D.MP4"),
   path.join(assets, "Drone", "clips", "hf_20260504_000532_cbe06e48-6c06-4509-b18e-0204c8ae4086.mp4"),
+  path.join(assets, "Additional", "master.mp4"),
 ];
 
 clipSources.forEach((src, index) => {
@@ -72,6 +76,7 @@ async function ensureDirs() {
     "public/img/great-room",
     "public/img/kitchen",
     "public/img/dining",
+    "public/img/bedrooms",
     "public/img/adu",
     "public/img/posters",
     "public/img/stills",
@@ -93,6 +98,12 @@ async function encodeImage(job) {
       img.clone().jpeg({ quality: 84, mozjpeg: true }).toFile(`${base}.jpg`),
     ]);
   }
+}
+
+async function isStale(source, output) {
+  if (!existsSync(output)) return true;
+  const [sourceStat, outputStat] = await Promise.all([stat(source), stat(output)]);
+  return sourceStat.mtimeMs > outputStat.mtimeMs;
 }
 
 async function encodeVideo(job) {
@@ -126,11 +137,11 @@ async function encodeVideo(job) {
     out,
   ];
   await mkdir(path.dirname(out), { recursive: true });
-  if (!existsSync(out)) {
+  if (await isStale(job.src, out)) {
     await run("ffmpeg", args);
   }
   await mkdir(path.dirname(poster), { recursive: true });
-  if (!existsSync(poster)) {
+  if (await isStale(out, poster)) {
     await run("ffmpeg", [
       "-y",
       "-hide_banner",
@@ -165,6 +176,7 @@ async function extractStills() {
     { file: "clips/fl5.mp4", slug: "clip-05", times: [1] },
     { file: "clips/fl6.mp4", slug: "clip-06", times: [1] },
     { file: "clips/fl7.mp4", slug: "clip-07", times: [1] },
+    { file: "clips/fl8.mp4", slug: "clip-08", times: [1] },
   ];
   for (const job of stillJobs) {
     const input = path.join(pub, "video", job.file);

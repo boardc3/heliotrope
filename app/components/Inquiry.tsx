@@ -1,7 +1,31 @@
+"use client";
+
+import { FormEvent } from "react";
 import { PROPERTY } from "../data/property";
 
+const INQUIRY_EMAIL = "mpatel@omnilocal.ai";
+const INQUIRY_SUBJECT = "437 Heliotrope · Package request";
+
 export function Inquiry() {
-  const subject = encodeURIComponent("437 Heliotrope · Package request");
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+    const body = [
+      message || "Please send the 437 Heliotrope package.",
+      name ? `Name: ${name}` : "",
+      email ? `Email: ${email}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    const mailto = `mailto:${INQUIRY_EMAIL}?subject=${encodeURIComponent(INQUIRY_SUBJECT)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  };
+
   return (
     <section id="inquiry" className="relative isolate overflow-hidden bg-ink text-bone">
       <video
@@ -52,7 +76,8 @@ export function Inquiry() {
         </div>
 
         <form
-          action={`mailto:mpatel@omnilocal.ai?subject=${subject}`}
+          onSubmit={handleSubmit}
+          action={`mailto:${INQUIRY_EMAIL}`}
           className="flex flex-col gap-5 rounded-sm border border-bone/12 bg-bone/[0.06] p-7 backdrop-blur-2xl md:p-9"
         >
           <h3 className="font-display text-2xl font-light tracking-[-0.025em] text-bone">Request the package</h3>
@@ -76,7 +101,7 @@ export function Inquiry() {
           <label className="flex flex-col gap-2 text-[0.62rem] font-medium uppercase tracking-widest3 text-bone/55">
             Message
             <textarea
-              name="body"
+              name="message"
               rows={5}
               defaultValue="Please send the 437 Heliotrope package."
               className="rounded-sm border border-bone/15 bg-transparent px-4 py-3.5 text-base font-normal text-bone outline-none transition placeholder:text-bone/35 focus:border-bone"

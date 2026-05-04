@@ -22,8 +22,8 @@ export function FullGallery() {
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
-            Filter through the renders and editorial stills pulled from the cinematic and aerial source material. Open
-            any image for the lightbox—keyboard, swipe, and zoom supported.
+            Filter through the exterior, bedroom, interior, and editorial stills pulled from the cinematic and aerial
+            source material. Open any image for the lightbox—keyboard, swipe, and zoom supported.
           </p>
         </div>
 

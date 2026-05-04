@@ -1,4 +1,12 @@
-export type GalleryCategory = "Exterior" | "Unit A" | "Kitchen" | "Dining" | "Unit B" | "Aerial" | "Lifestyle";
+export type GalleryCategory =
+  | "Exterior"
+  | "Unit A"
+  | "Bedrooms"
+  | "Kitchen"
+  | "Dining"
+  | "Unit B"
+  | "Aerial"
+  | "Lifestyle";
 
 export type GalleryItem = {
   id: string;
@@ -11,13 +19,16 @@ export type GalleryItem = {
   aspect?: "portrait" | "wide" | "square";
 };
 
-export const filters = ["All", "Exterior", "Unit A", "Kitchen", "Dining", "Unit B", "Aerial", "Lifestyle"] as const;
+export const filters = ["All", "Exterior", "Unit A", "Bedrooms", "Kitchen", "Dining", "Unit B", "Aerial", "Lifestyle"] as const;
 
 export const galleryItems: GalleryItem[] = [
   { id: "ext-existing", category: "Exterior", title: "Village Elevation", meta: "Existing street presence", bucket: "exterior", slug: "ext-01", alt: "Existing exterior at 437 Heliotrope Avenue", aspect: "wide" },
   { id: "ext-after", category: "Exterior", title: "Reimagined Facade", meta: "Clean coastal duplex concept", bucket: "exterior", slug: "ext-02", alt: "Reimagined exterior concept at 437 Heliotrope Avenue", aspect: "wide" },
+  { id: "ext-deck", category: "Exterior", title: "Terrace Connection", meta: "Deck · planting · outdoor room", bucket: "exterior", slug: "ext-03", alt: "Reimagined deck and exterior terrace at 437 Heliotrope Avenue", aspect: "wide" },
   { id: "gr-01", category: "Unit A", title: "Great Room Study", meta: "White oak · plaster · soft daylight", bucket: "great-room", slug: "gr-01", alt: "Unit A open great room render", aspect: "wide" },
   { id: "gr-02", category: "Unit A", title: "Dining Axis", meta: "Connected living, dining, and kitchen", bucket: "great-room", slug: "gr-02", alt: "Open dining and living room render", aspect: "wide" },
+  { id: "bed-01", category: "Bedrooms", title: "Primary Suite", meta: "Warm millwork · terrace light", bucket: "bedrooms", slug: "bed-01", alt: "Primary bedroom concept with warm millwork and terrace access", aspect: "wide" },
+  { id: "bed-02", category: "Bedrooms", title: "Built-In Retreat", meta: "Storage wall · reading bench · balcony", bucket: "bedrooms", slug: "bed-02", alt: "Bedroom suite concept with built-in storage and balcony access", aspect: "wide" },
   { id: "kt-03", category: "Kitchen", title: "Chef's Kitchen", meta: "Stone counters · warm millwork", bucket: "kitchen", slug: "kt-03", alt: "Unit A kitchen render with stone island", aspect: "wide" },
   { id: "kt-04", category: "Kitchen", title: "Island Detail", meta: "Layered neutrals and integrated lighting", bucket: "kitchen", slug: "kt-04", alt: "Kitchen island and living space render", aspect: "wide" },
   { id: "dn-05", category: "Dining", title: "Gathering Room", meta: "Village-scale entertaining", bucket: "dining", slug: "dn-05", alt: "Dining and great room render", aspect: "wide" },
@@ -32,4 +43,5 @@ export const galleryItems: GalleryItem[] = [
   { id: "clip-01", category: "Lifestyle", title: "Light Study I", meta: "Interior motion still", bucket: "stills", slug: "clip-01-01", alt: "Interior lifestyle clip still", aspect: "portrait" },
   { id: "clip-02", category: "Lifestyle", title: "Threshold", meta: "Interior motion still", bucket: "stills", slug: "clip-02-01", alt: "Second interior lifestyle clip still", aspect: "portrait" },
   { id: "clip-05", category: "Lifestyle", title: "Quiet Object", meta: "Unit B motion still", bucket: "stills", slug: "clip-05-01", alt: "Unit B lifestyle clip still", aspect: "portrait" },
+  { id: "clip-08", category: "Exterior", title: "Deck Film Still", meta: "Outdoor living motion still", bucket: "stills", slug: "clip-08-01", alt: "Exterior deck motion still", aspect: "portrait" },
 ];

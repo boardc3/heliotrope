@@ -29,6 +29,22 @@ const cards = [
     span: "lg:col-span-5 aspect-[4/3]",
   },
   {
+    bucket: "bedrooms",
+    slug: "bed-01",
+    area: "Primary Suite",
+    title: "Terrace Morning",
+    materials: "wood ceiling · built-ins · private deck connection",
+    span: "lg:col-span-7 aspect-[4/3]",
+  },
+  {
+    bucket: "bedrooms",
+    slug: "bed-02",
+    area: "Bedroom Suite",
+    title: "Built-In Retreat",
+    materials: "storage wall · reading bench · warm evening light",
+    span: "lg:col-span-5 aspect-[4/3]",
+  },
+  {
     bucket: "dining",
     slug: "dn-05",
     area: "Dining",
@@ -58,8 +74,8 @@ export function InteriorGallery() {
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
-            Unit A is visualized as a seamless living, dining, and kitchen environment—natural light, grounded
-            surfaces, and a palette that lets the village location stay in the foreground.
+            Unit A is visualized as a seamless living, dining, kitchen, and bedroom environment—natural light,
+            grounded surfaces, and a palette that lets the village location stay in the foreground.
           </p>
         </div>
 

@@ -10,6 +10,7 @@ const clips = [
   { title: "A second residence", area: "Unit B" },
   { title: "Above the village", area: "Aerial" },
   { title: "Last light", area: "Aerial" },
+  { title: "Deck connection", area: "Exterior" },
 ];
 
 function AutoVideo({ index }: { index: number }) {
@@ -64,8 +65,8 @@ export function LifestyleClips() {
           </div>
           <div className="flex items-end justify-between gap-6 lg:pb-3">
             <p className="max-w-md text-base leading-[1.75] text-bone/68">
-              Drag through quiet vignettes from inside the residences, the second unit, and the aerial context above
-              Corona del Mar.
+              Drag through quiet vignettes from inside the residences, the second unit, the exterior deck, and the
+              aerial context above Corona del Mar.
             </p>
             <div className="hidden gap-2 md:flex">
               <button

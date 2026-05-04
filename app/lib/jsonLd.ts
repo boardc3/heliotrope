@@ -4,8 +4,11 @@ export function listingJsonLd(siteUrl: string) {
   const images = [
     `${siteUrl}/img/exterior/ext-02-1920.jpg`,
     `${siteUrl}/img/exterior/ext-01-1920.jpg`,
+    `${siteUrl}/img/exterior/ext-03-1920.jpg`,
     `${siteUrl}/img/great-room/gr-01-1920.jpg`,
     `${siteUrl}/img/great-room/gr-02-1920.jpg`,
+    `${siteUrl}/img/bedrooms/bed-01-1920.jpg`,
+    `${siteUrl}/img/bedrooms/bed-02-1920.jpg`,
     `${siteUrl}/img/kitchen/kt-03-1920.jpg`,
     `${siteUrl}/img/kitchen/kt-04-1920.jpg`,
     `${siteUrl}/img/dining/dn-05-1920.jpg`,
