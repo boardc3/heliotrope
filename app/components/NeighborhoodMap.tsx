@@ -3,12 +3,22 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { categoryColors, categoryLabels, PoiCategory, pois, propertyMarker } from "../data/poi";
+import { categoryColors, categoryLabels, googleMapsUrl, PoiCategory, pois, propertyMarker } from "../data/poi";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
 if (MAPBOX_TOKEN) mapboxgl.accessToken = MAPBOX_TOKEN;
 
-const categories: ("all" | PoiCategory)[] = ["all", "beaches", "resorts", "dining", "outdoors", "culture"];
+const categories: ("all" | PoiCategory)[] = [
+  "all",
+  "beaches",
+  "dining",
+  "shopping",
+  "outdoors",
+  "schools",
+  "transport",
+  "resorts",
+  "culture",
+];
 
 function miles(a: [number, number], b: [number, number]) {
   const toRad = (v: number) => (v * Math.PI) / 180;
@@ -24,12 +34,18 @@ function miles(a: [number, number], b: [number, number]) {
 const ICONS: Record<PoiCategory, string> = {
   beaches:
     '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 17c1.5-1.6 3-1.6 4.5 0s3 1.6 4.5 0 3-1.6 4.5 0 3 1.6 4.5 0M3 13c1.5-1.6 3-1.6 4.5 0s3 1.6 4.5 0 3-1.6 4.5 0 3 1.6 4.5 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
-  resorts:
-    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 20V11l8-6 8 6v9M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>',
   dining:
     '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 3v8c0 1.5 1 3 3 3v7M7 3v6c0 1 .5 1.5 1.5 1.5S10 10 10 9V3M16 3c-1.5 0-3 1.5-3 3.5v5c0 1 .5 1.5 1.5 1.5h1.5V21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  shopping:
+    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 8h14l-1.4 11a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7L5 8zM9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>',
   outdoors:
     '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l-7 14h14L12 3zM6 21h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+  schools:
+    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2 9l10-5 10 5-10 5L2 9zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+  transport:
+    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12l-9 6 1-4H3l1-4h11l-1-4 8 6z" fill="currentColor"/></svg>',
+  resorts:
+    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 20V11l8-6 8 6v9M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>',
   culture:
     '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 21V9l7-5 7 5v12M5 21h14M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>',
 };
@@ -130,12 +146,16 @@ export function NeighborhoodMap() {
       el.setAttribute("aria-label", poi.name);
       el.innerHTML = `${ICONS[poi.category]}<span>${poi.name}</span>`;
       const dist = miles(propertyMarker.coords, poi.coords);
-      const popup = new mapboxgl.Popup({ offset: 22, closeButton: false, maxWidth: "300px" }).setHTML(`
+      const popup = new mapboxgl.Popup({ offset: 22, closeButton: false, maxWidth: "320px" }).setHTML(`
         <div style="padding:22px 22px 20px;background:#F4EEDF;color:#13110E">
           <p style="margin:0;font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:${categoryColors[poi.category]}">${categoryLabels[poi.category]}</p>
           <h3 style="margin:10px 0 6px;font-family:var(--font-fraunces,serif);font-weight:300;font-size:22px;letter-spacing:-.02em;line-height:1.05">${poi.name}</h3>
-          <p style="margin:0 0 14px;font-size:14px;line-height:1.55;color:rgba(19,17,14,.66)">${poi.blurb}</p>
-          <p style="margin:0;font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(19,17,14,.5)">${dist.toFixed(1)} mi · ~${Math.max(2, Math.round((dist / 22) * 60))} min drive</p>
+          <p style="margin:0 0 6px;font-size:13px;line-height:1.55;color:rgba(19,17,14,.55)">${poi.address}</p>
+          <p style="margin:0 0 14px;font-size:14px;line-height:1.55;color:rgba(19,17,14,.7)">${poi.blurb}</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid rgba(19,17,14,.1);padding-top:12px">
+            <span style="font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(19,17,14,.5)">${dist.toFixed(1)} mi · ~${Math.max(2, Math.round((dist / 22) * 60))} min drive</span>
+            <a href="${googleMapsUrl(poi)}" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#A85A2F;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px">Open in Maps →</a>
+          </div>
         </div>`);
       el.addEventListener("click", () => {
         setActive(poi.id);
@@ -185,14 +205,14 @@ export function NeighborhoodMap() {
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">08 — Neighborhood</span>
+            <span className="eyebrow">04 — Neighborhood</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
-              Thirty reasons the <span className="italic">address</span> matters.
+              The everyday <span className="italic">geography</span> of the address.
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
-            Beaches, restaurants, trails, resorts, and Newport culture orbit the property. Tap a marker or list item
-            to understand the everyday geography of Heliotrope Avenue.
+            Beaches, dining, schools, shopping, transport, trails, resorts, and Newport culture orbit 437 Heliotrope.
+            Tap any marker or list item for context, distance, and a direct link to the location in Google Maps.
           </p>
         </div>
 
@@ -213,29 +233,39 @@ export function NeighborhoodMap() {
             </div>
             <div className="no-scrollbar flex-1 overflow-auto p-2">
               {filtered.map((poi) => (
-                <button
+                <div
                   key={poi.id}
-                  onClick={() => focusPoi(poi.id)}
-                  className={`flex w-full items-start gap-3 rounded-sm p-4 text-left transition ${
-                    active === poi.id ? "bg-pearl" : "hover:bg-pearl/55"
-                  }`}
+                  className={`group rounded-sm p-3 transition ${active === poi.id ? "bg-pearl" : "hover:bg-pearl/55"}`}
                 >
-                  <span
-                    className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
-                    style={{ background: categoryColors[poi.category] }}
-                  />
-                  <span className="flex-1">
-                    <span className="flex items-baseline justify-between gap-3">
-                      <span className="font-display text-[1.05rem] font-normal leading-tight tracking-[-0.02em]">
-                        {poi.name}
+                  <button
+                    onClick={() => focusPoi(poi.id)}
+                    className="flex w-full items-start gap-3 text-left"
+                  >
+                    <span
+                      className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
+                      style={{ background: categoryColors[poi.category] }}
+                    />
+                    <span className="flex-1">
+                      <span className="flex items-baseline justify-between gap-3">
+                        <span className="font-display text-[1.05rem] font-normal leading-tight tracking-[-0.02em]">
+                          {poi.name}
+                        </span>
+                        <span className="tabular text-[0.62rem] font-medium uppercase tracking-widest3 text-ink/45">
+                          {miles(propertyMarker.coords, poi.coords).toFixed(1)} mi
+                        </span>
                       </span>
-                      <span className="tabular text-[0.62rem] font-medium uppercase tracking-widest3 text-ink/45">
-                        {miles(propertyMarker.coords, poi.coords).toFixed(1)} mi
-                      </span>
+                      <span className="mt-1 block text-[0.85rem] leading-5 text-ink/58">{poi.blurb}</span>
                     </span>
-                    <span className="mt-1 block text-[0.85rem] leading-5 text-ink/58">{poi.blurb}</span>
-                  </span>
-                </button>
+                  </button>
+                  <a
+                    href={googleMapsUrl(poi)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-5 mt-2 inline-flex items-center gap-1 text-[0.6rem] font-medium uppercase tracking-widest3 text-ember/0 transition group-hover:text-ember"
+                  >
+                    Open in Maps →
+                  </a>
+                </div>
               ))}
             </div>
           </aside>

@@ -52,7 +52,7 @@ export function InteriorGallery() {
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">03 — Inside the Home</span>
+            <span className="eyebrow">02 — Inside the Home</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
               Warm material work for a <span className="italic">walkable</span> coastal life.
             </h2>

@@ -57,7 +57,7 @@ export function LifestyleClips() {
       <div className="relative mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow !text-bone/72">04 — Motion Studies</span>
+            <span className="eyebrow !text-bone/72">03 — Motion Studies</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em] text-bone">
               Small films for the <span className="italic">rhythm</span> of the property.
             </h2>

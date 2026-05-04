@@ -1,6 +1,5 @@
 import { Adu } from "./components/Adu";
 import { Aerial } from "./components/Aerial";
-import { ExteriorConfigurator } from "./components/ExteriorConfigurator";
 import { Footer } from "./components/Footer";
 import { FullGallery } from "./components/FullGallery";
 import { Hero } from "./components/Hero";
@@ -16,13 +15,12 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Snapshot />
-        <ExteriorConfigurator />
         <InteriorGallery />
         <LifestyleClips />
+        <NeighborhoodMapLoader />
         <Aerial />
         <Adu />
         <FullGallery />
-        <NeighborhoodMapLoader />
         <Inquiry />
       </main>
       <Footer />

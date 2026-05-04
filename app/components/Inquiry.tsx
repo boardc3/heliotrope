@@ -19,7 +19,7 @@ export function Inquiry() {
       <div className="relative section-pad mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[1fr_0.85fr]">
         <div className="flex flex-col gap-10">
           <div>
-            <span className="eyebrow !text-bone/72">09 — Inquiry</span>
+            <span className="eyebrow !text-bone/72">08 — Inquiry</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em] text-bone">
               Bring the full story <span className="italic">into the room</span>.
             </h2>

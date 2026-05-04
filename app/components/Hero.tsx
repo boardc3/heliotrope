@@ -1,7 +1,6 @@
 import { ADDRESS } from "../data/property";
 
 const navLinks = [
-  { href: "#vision", label: "Vision" },
   { href: "#interiors", label: "Interiors" },
   { href: "#gallery", label: "Gallery" },
   { href: "#map", label: "Neighborhood" },
@@ -67,8 +66,8 @@ export function Hero() {
               flexibility, and the daily ease of village walkability.
             </p>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <a href="#vision" className="btn-primary !bg-bone !text-ink hover:!bg-ember hover:!text-bone">
-                See the vision
+              <a href="#interiors" className="btn-primary !bg-bone !text-ink hover:!bg-ember hover:!text-bone">
+                Step inside
               </a>
               <a href="#inquiry" className="btn-ghost">
                 Request the package
