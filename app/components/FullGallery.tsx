@@ -1,46 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMemo, useState } from "react";
-import { filters, galleryItems } from "../data/galleryItems";
+import { useState } from "react";
+import { galleryItems } from "../data/galleryItems";
 import { Lightbox } from "./Lightbox";
 import { Picture } from "./Picture";
 
 export function FullGallery() {
-  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const items = useMemo(() => galleryItems.filter((item) => filter === "All" || item.category === filter), [filter]);
+  const items = galleryItems;
 
   return (
     <section id="gallery" className="relative bg-bone section-pad">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">07 — Full Gallery</span>
+            <span className="eyebrow">09 — Short Interior Edit</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
-              Every angle, still, and <span className="italic">material</span> cue.
+              A short <span className="italic">interior</span> edit.
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
-            Filter through the exterior, bedroom, interior, and editorial stills pulled from the cinematic and aerial
-            source material. Open any image for the lightbox—keyboard, swipe, and zoom supported.
+            A smaller set of selected interior views keeps the page focused and avoids asking buyers to sort through
+            categories or duplicate angles. Open any image for the lightbox.
           </p>
-        </div>
-
-        <div className="mt-10 flex flex-wrap gap-2">
-          {filters.map((item) => (
-            <button
-              key={item}
-              onClick={() => setFilter(item)}
-              className={`rounded-full border px-4 py-2 text-[0.62rem] font-medium uppercase tracking-widest3 transition ${
-                filter === item
-                  ? "border-ink bg-ink text-bone"
-                  : "border-line text-ink/60 hover:border-ink/30 hover:text-ink"
-              }`}
-            >
-              {item}
-            </button>
-          ))}
         </div>
 
         <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">

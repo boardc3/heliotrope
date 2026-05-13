@@ -13,7 +13,7 @@ export function Adu() {
       <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-stretch">
         <div className="flex flex-col justify-between gap-12 rounded-sm bg-bone p-9 lg:p-12">
           <div>
-            <span className="eyebrow">06 — Unit B</span>
+            <span className="eyebrow">08 — Unit B</span>
             <h2 className="mt-6 font-display text-[clamp(2.4rem,4.6vw,4rem)] font-light leading-[1.02] tracking-[-0.035em]">
               A second residence, <span className="italic">by design</span>.
             </h2>
@@ -21,6 +21,9 @@ export function Adu() {
               The duplex program gives 437 Heliotrope a useful second life: guest quarters, long-term rental, extended
               family, office, or a private coastal base with its own identity.
             </p>
+            <a href="/docs/Design-Inspo-437-Heliotrope.pdf" className="btn-primary mt-7">
+              Open package PDF
+            </a>
           </div>
           <ul className="grid gap-3 border-t border-line pt-6">
             {features.map((feature) => (

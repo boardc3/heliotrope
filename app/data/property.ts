@@ -19,6 +19,7 @@ export const PROPERTY = {
   propertyType: "Duplex",
   mls: "LG25048387",
   salePrice: "$3,300,000",
+  completion: "Buyer package ready",
 };
 
 export const snapshotStats = [
@@ -27,5 +28,7 @@ export const snapshotStats = [
   { label: "Residences", value: "2", sub: "Unit A + Unit B flexibility", numeric: 2, format: "int" },
   { label: "Bedrooms", value: "4", sub: "across the duplex program", numeric: 4, format: "int" },
   { label: "Baths", value: "3", sub: "updated layout potential", numeric: 3, format: "int" },
+  { label: "Lot", value: "0.08", sub: "acres in the CdM village grid", numeric: 0.08, format: "decimal2" },
   { label: "Village blocks", value: "1", sub: "to PCH dining and daily rituals", numeric: 1, format: "int" },
+  { label: "List price", value: "3.3", sub: "$3,300,000 asking price", numeric: 3.3, format: "decimal" },
 ] as const;

@@ -27,14 +27,14 @@ export default function Image() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 124, lineHeight: 0.9, letterSpacing: -7 }}>437 Heliotrope.</div>
           <div style={{ display: "flex", marginTop: 28, fontSize: 32, color: "rgba(244,238,223,.82)", fontStyle: "italic" }}>
-            A village address, one block from the sea.
+            Refreshed cinematic buyer package.
           </div>
         </div>
         <div style={{ display: "flex", gap: 36, fontSize: 22, color: "rgba(244,238,223,.78)" }}>
           <span style={{ display: "flex" }}>2,499 SF</span>
           <span style={{ display: "flex" }}>4 BR</span>
           <span style={{ display: "flex" }}>3 BA</span>
-          <span style={{ display: "flex" }}>Duplex</span>
+          <span style={{ display: "flex" }}>Two residences</span>
         </div>
       </div>
     ),

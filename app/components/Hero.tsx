@@ -1,9 +1,10 @@
 import { ADDRESS } from "../data/property";
 
 const navLinks = [
+  { href: "#property", label: "Details" },
+  { href: "#design-vision", label: "Design" },
+  { href: "#floor-plans", label: "Plans" },
   { href: "#interiors", label: "Interiors" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#map", label: "Neighborhood" },
   { href: "#inquiry", label: "Inquiry" },
 ];
 
@@ -12,7 +13,7 @@ export function Hero() {
     <section className="relative min-h-[100svh] overflow-hidden bg-ink text-bone">
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src="/video/hero-1080.mp4"
+        src="/video/helio-5-13.mp4"
         poster="/img/posters/hero.jpg"
         autoPlay
         muted
@@ -62,12 +63,12 @@ export function Hero() {
           </div>
           <div className="flex max-w-xl flex-col gap-7 lg:items-end lg:text-right">
             <p className="text-[1.05rem] leading-[1.65] text-bone/82 md:text-lg">
-              437 Heliotrope is a two-residence Corona del Mar property positioned for refined coastal living, income
-              flexibility, and the daily ease of village walkability.
+              437 Heliotrope is a two-residence Corona del Mar property with a refreshed cinematic package,
+              completed design direction, income flexibility, and the daily ease of village walkability.
             </p>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <a href="#interiors" className="btn-primary !bg-bone !text-ink hover:!bg-ember hover:!text-bone">
-                Step inside
+              <a href="#property" className="btn-primary !bg-bone !text-ink hover:!bg-ember hover:!text-bone">
+                View details
               </a>
               <a href="#inquiry" className="btn-ghost">
                 Request the package

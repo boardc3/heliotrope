@@ -8,31 +8,31 @@ const cards = [
     bucket: "great-room",
     slug: "gr-01",
     area: "Unit A",
-    title: "The Great Room",
-    materials: "white oak · plaster walls · integrated dining",
+    title: "Great Room Hearth",
+    materials: "white oak · plaster · soft daylight",
     span: "lg:col-span-7 lg:row-span-2 aspect-[4/5] lg:aspect-auto",
   },
   {
     bucket: "kitchen",
     slug: "kt-03",
     area: "Kitchen",
-    title: "The Chef's Axis",
+    title: "Chef's Kitchen",
     materials: "stone counters · warm millwork · soft brass",
     span: "lg:col-span-5 aspect-[4/3]",
   },
   {
     bucket: "kitchen",
     slug: "kt-04",
-    area: "Kitchen",
-    title: "Island Light",
-    materials: "waterfall surfaces · hidden storage · calm palette",
+    area: "Dining",
+    title: "Connected Dining",
+    materials: "open living · dining · kitchen",
     span: "lg:col-span-5 aspect-[4/3]",
   },
   {
     bucket: "bedrooms",
     slug: "bed-01",
     area: "Primary Suite",
-    title: "Terrace Morning",
+    title: "Primary Retreat",
     materials: "wood ceiling · built-ins · private deck connection",
     span: "lg:col-span-7 aspect-[4/3]",
   },
@@ -47,18 +47,10 @@ const cards = [
   {
     bucket: "dining",
     slug: "dn-05",
-    area: "Dining",
-    title: "Gathering Room",
-    materials: "wide openings · layered neutrals · coastal daylight",
+    area: "Unit B",
+    title: "Second Residence",
+    materials: "warm neutrals · independent flexibility",
     span: "lg:col-span-7 aspect-[4/3]",
-  },
-  {
-    bucket: "great-room",
-    slug: "gr-02",
-    area: "Unit A",
-    title: "Connected Living",
-    materials: "lounge · dining · kitchen in one continuous field",
-    span: "lg:col-span-12 aspect-[16/8]",
   },
 ];
 
@@ -68,14 +60,14 @@ export function InteriorGallery() {
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">02 — Inside the Home</span>
+            <span className="eyebrow">06 — Inside the Home</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
-              Warm material work for a <span className="italic">walkable</span> coastal life.
+              A tighter read on the <span className="italic">finished</span> rooms.
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
-            Unit A is visualized as a seamless living, dining, kitchen, and bedroom environment—natural light,
-            grounded surfaces, and a palette that lets the village location stay in the foreground.
+            Stone, millwork, lighting, fixtures, and natural textures are presented as one cohesive material story,
+            not a menu of disconnected buyer decisions.
           </p>
         </div>
 

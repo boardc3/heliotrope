@@ -24,11 +24,11 @@ export function listingJsonLd(siteUrl: string) {
       {
         "@type": "RealEstateListing",
         "@id": `${siteUrl}/#listing`,
-        name: `${ADDRESS} showcase`,
-        headline: "A reimagined Corona del Mar duplex one block from village dining.",
+        name: `${ADDRESS} buyer package`,
+        headline: "A refreshed two-residence Corona del Mar property one block from village dining.",
         description:
-          "A cinematic showcase for 437 Heliotrope Avenue, a two-residence Corona del Mar property positioned for refined coastal living, income flexibility, and walkable village access.",
-        datePosted: "2026-05-03",
+          "A refreshed cinematic showcase for 437 Heliotrope Avenue, a two-residence Corona del Mar property positioned for refined coastal living, income flexibility, walkable village access, and a completed buyer package.",
+        datePosted: "2026-05-13",
         url: siteUrl,
         image: images,
         mainEntityOfPage: { "@id": `${siteUrl}/#webpage` },
@@ -48,6 +48,7 @@ export function listingJsonLd(siteUrl: string) {
           "Unit B flexibility",
           "Village walkability",
           "Coastal proximity",
+          "Completed buyer package",
           "Aerial context",
         ].map((name) => ({ "@type": "LocationFeatureSpecification", name, value: true })),
         address: { "@id": `${siteUrl}/#place` },

@@ -1,12 +1,14 @@
 import { Adu } from "./components/Adu";
 import { Aerial } from "./components/Aerial";
+import { DesignVision } from "./components/DesignVision";
 import { Footer } from "./components/Footer";
+import { FloorPlans } from "./components/FloorPlans";
 import { FullGallery } from "./components/FullGallery";
 import { Hero } from "./components/Hero";
 import { Inquiry } from "./components/Inquiry";
 import { InteriorGallery } from "./components/InteriorGallery";
-import { LifestyleClips } from "./components/LifestyleClips";
 import { NeighborhoodMapLoader } from "./components/NeighborhoodMapLoader";
+import { ProjectTimeline } from "./components/ProjectTimeline";
 import { Snapshot } from "./components/Snapshot";
 
 export default function Home() {
@@ -15,12 +17,14 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Snapshot />
+        <DesignVision />
+        <ProjectTimeline />
+        <FloorPlans />
         <InteriorGallery />
-        <LifestyleClips />
-        <NeighborhoodMapLoader />
         <Aerial />
         <Adu />
         <FullGallery />
+        <NeighborhoodMapLoader />
         <Inquiry />
       </main>
       <Footer />

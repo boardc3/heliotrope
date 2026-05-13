@@ -15,7 +15,7 @@ export function Aerial() {
 
       <div className="relative z-10 flex min-h-[80svh] flex-col justify-end px-6 pb-16 pt-24 md:px-10 lg:px-16">
         <div className="mx-auto w-full max-w-[1280px]">
-          <span className="eyebrow !text-bone/72">05 — Aerial Context</span>
+          <span className="eyebrow !text-bone/72">07 — Aerial Context</span>
           <h2 className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,7vw,6.4rem)] font-light leading-[0.96] tracking-[-0.035em] text-bone">
             CdM Village below.
             <br />

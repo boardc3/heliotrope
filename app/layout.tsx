@@ -20,9 +20,9 @@ const inter = Inter({
   weight: ["300", "400", "500"],
 });
 
-const title = `${ADDRESS} · A Corona del Mar Duplex Reimagined`;
+const title = `${ADDRESS} · A Corona del Mar Duplex Buyer Package`;
 const description =
-  "A cinematic showcase for 437 Heliotrope Avenue in Corona del Mar: a two-residence coastal property with village walkability, refined redesign potential, and Newport Beach context.";
+  "A refreshed cinematic showcase for 437 Heliotrope Avenue in Corona del Mar: a two-residence coastal property with village walkability, a completed design package, and Newport Beach context.";
 
 export const viewport: Viewport = {
   themeColor: [

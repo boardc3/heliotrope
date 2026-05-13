@@ -4,10 +4,11 @@ import { motion, useInView, useMotionValue, useTransform, animate } from "framer
 import { useEffect, useRef } from "react";
 import { snapshotStats } from "../data/property";
 
-function Counter({ value, format }: { value: number; format: "int" | "decimal" | "year" }) {
+function Counter({ value, format }: { value: number; format: "int" | "decimal" | "decimal2" | "year" }) {
   const motionValue = useMotionValue(0);
   const display = useTransform(motionValue, (latest) => {
     if (format === "year") return String(Math.round(latest));
+    if (format === "decimal2") return latest.toFixed(2);
     if (format === "decimal") return latest.toFixed(1);
     return Math.round(latest).toLocaleString();
   });
@@ -25,25 +26,25 @@ export function Snapshot() {
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <section ref={ref} className="relative bg-bone section-pad">
+    <section id="property" ref={ref} className="relative bg-bone section-pad">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-12 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
             <span className="eyebrow">01 — The Snapshot</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
-              A rare CdM address with a flexible <span className="italic">two-residence</span> program.
+              Key details, without the <span className="italic">extra</span> scroll.
             </h2>
           </div>
           <div className="lg:pb-3">
             <p className="max-w-xl text-base leading-[1.75] text-ink/68 md:text-[1.05rem]">
               Public listing data describes the property as a four-bedroom, three-bath duplex with roughly 2,499 square
-              feet of living area on a tightly held block of Heliotrope Avenue. The opportunity is the mix:
-              village proximity, separate-unit optionality, and a clear design direction.
+              feet of living area, 3,485 square feet of total area, village proximity, separate-unit optionality,
+              and a clearer design package for serious buyers.
             </p>
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 divide-x divide-y divide-line border-y border-line lg:grid-cols-3">
+        <div className="mt-16 grid grid-cols-2 divide-x divide-y divide-line border-y border-line lg:grid-cols-4">
           {snapshotStats.map((stat, index) => (
             <motion.div
               key={stat.label}

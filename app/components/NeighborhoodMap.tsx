@@ -225,7 +225,7 @@ export function NeighborhoodMap() {
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[0.55fr_1fr] lg:items-end">
           <div>
-            <span className="eyebrow">04 — Neighborhood</span>
+            <span className="eyebrow">10 — Neighborhood</span>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
               The everyday <span className="italic">geography</span> of the address.
             </h2>
