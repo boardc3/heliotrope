@@ -32,7 +32,7 @@ unitAFiles.forEach((file, index) => {
 
 const videoJobs = [
   { src: path.join(assets, "Helio-5-27.mp4"), out: "helio-5-27.mp4", poster: "hero.jpg", crf: 28, height: 1080, audio: false, posterAt: 2 },
-  { src: path.join(assets, "Drone", "clips", "hf_20260504_000532_cbe06e48-6c06-4509-b18e-0204c8ae4086.mp4"), out: "aerial-1080.mp4", poster: "aerial.jpg", crf: 30, height: 1080, audio: false, posterAt: 1 },
+  { src: path.join(assets, "House_must_remain_same_202605272203.mp4"), out: "aerial-1080.mp4", poster: "aerial.jpg", crf: 30, height: 1080, audio: false, posterAt: 1 },
   { src: path.join(assets, "Drone", "clips", "hf_20260503_235109_11fe37a2-ee8d-4b74-a8ca-5867046262a9.mp4"), out: "aerial2-1080.mp4", poster: "aerial2.jpg", crf: 31, height: 1080, audio: false, posterAt: 2 },
 ];
 
