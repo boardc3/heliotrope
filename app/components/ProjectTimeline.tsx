@@ -2,7 +2,7 @@ const phases = [
   {
     phase: "Media Refresh",
     status: "Updated",
-    message: "The primary hero film and exterior image set now use the May 13 Heliotrope video package.",
+    message: "The primary hero film now uses the May 27 Heliotrope video package.",
   },
   {
     phase: "Design Package",

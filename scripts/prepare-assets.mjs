@@ -31,7 +31,7 @@ unitAFiles.forEach((file, index) => {
 });
 
 const videoJobs = [
-  { src: path.join(assets, "helio-5-13.mp4"), out: "helio-5-13.mp4", poster: "hero.jpg", crf: 28, height: 1080, audio: false, posterAt: 2 },
+  { src: path.join(assets, "Helio-5-27.mp4"), out: "helio-5-27.mp4", poster: "hero.jpg", crf: 28, height: 1080, audio: false, posterAt: 2 },
   { src: path.join(assets, "Drone", "clips", "hf_20260504_000532_cbe06e48-6c06-4509-b18e-0204c8ae4086.mp4"), out: "aerial-1080.mp4", poster: "aerial.jpg", crf: 30, height: 1080, audio: false, posterAt: 1 },
   { src: path.join(assets, "Drone", "clips", "hf_20260503_235109_11fe37a2-ee8d-4b74-a8ca-5867046262a9.mp4"), out: "aerial2-1080.mp4", poster: "aerial2.jpg", crf: 31, height: 1080, audio: false, posterAt: 2 },
 ];
@@ -166,7 +166,7 @@ async function encodeVideo(job) {
 
 async function extractStills() {
   const stillJobs = [
-    { file: "helio-5-13.mp4", slug: "hero", times: [2, 5, 9, 13] },
+    { file: "helio-5-27.mp4", slug: "hero", times: [2, 5, 9, 13] },
     { file: "aerial-1080.mp4", slug: "aerial", times: [1, 3, 6] },
     { file: "aerial2-1080.mp4", slug: "village", times: [2, 5, 9] },
     { file: "clips/fl1.mp4", slug: "clip-01", times: [1] },

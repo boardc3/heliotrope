@@ -13,7 +13,7 @@ export function Hero() {
     <section className="relative min-h-[100svh] overflow-hidden bg-ink text-bone">
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src="/video/helio-5-13.mp4"
+        src="/video/helio-5-27.mp4"
         poster="/img/posters/hero.jpg"
         autoPlay
         muted
