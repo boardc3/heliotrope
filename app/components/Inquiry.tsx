@@ -30,8 +30,8 @@ export function Inquiry() {
     <section id="inquiry" className="relative isolate overflow-hidden bg-ink text-bone">
       <video
         className="absolute inset-0 h-full w-full object-cover opacity-32"
-        src="/video/aerial2-1080.mp4"
-        poster="/img/posters/aerial2.jpg"
+        src="/video/helio-5-27.mp4"
+        poster="/img/posters/hero.jpg"
         autoPlay
         muted
         loop
