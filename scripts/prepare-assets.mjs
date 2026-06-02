@@ -14,7 +14,7 @@ const imageJobs = [
   { src: path.join(assets, "Additional", "hf_20260504_162305_4dde9854-d5fc-4f3b-8efd-67f1ef5f3f0a.png"), bucket: "exterior", slug: "ext-03", alt: "Reimagined deck and exterior terrace concept at 437 Heliotrope" },
   { src: path.join(assets, "Additional", "hf_20260504_161936_365a77a6-cad3-461b-a505-390257239508.png"), bucket: "bedrooms", slug: "bed-01", alt: "Primary bedroom concept with warm millwork and terrace access" },
   { src: path.join(assets, "Additional", "hf_20260504_162254_56d383bb-5bfd-4716-bacc-dbc9822642f5.png"), bucket: "bedrooms", slug: "bed-02", alt: "Bedroom suite concept with built-in storage and balcony access" },
-  { src: path.join(assets, "Unit B", "hf_20260503_192929_96e7ab5a-592c-46b4-9550-58057c9c9292.png"), bucket: "adu", slug: "adu-01", alt: "Unit B living space with warm neutral finishes" },
+  { src: path.join(assets, "Unit B", "hf_20260503_192929_96e7ab5a-592c-46b4-9550-58057c9c9292.png"), bucket: "adu", slug: "adu-01", alt: "Unit B rear condo living space with warm neutral finishes" },
 ];
 
 const unitA = path.join(assets, "Unit A");

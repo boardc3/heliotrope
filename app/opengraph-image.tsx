@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SHORT_ADDRESS } from "./data/property";
+import { PROPERTY, SHORT_ADDRESS } from "./data/property";
 
 export const alt = `${SHORT_ADDRESS} property showcase`;
 export const size = { width: 1200, height: 630 };
@@ -22,19 +22,19 @@ export default function Image() {
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 18, letterSpacing: 8, textTransform: "uppercase", color: "rgba(244,238,223,.78)" }}>
           <span style={{ display: "flex" }}>Corona del Mar · 92625</span>
-          <span style={{ display: "flex" }}>MLS LG25048387</span>
+          <span style={{ display: "flex" }}>MLS {PROPERTY.mls}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 124, lineHeight: 0.9, letterSpacing: -7 }}>437 Heliotrope.</div>
           <div style={{ display: "flex", marginTop: 28, fontSize: 32, color: "rgba(244,238,223,.82)", fontStyle: "italic" }}>
-            Refreshed cinematic buyer package.
+            Two connected condos · sold separately.
           </div>
         </div>
         <div style={{ display: "flex", gap: 36, fontSize: 22, color: "rgba(244,238,223,.78)" }}>
-          <span style={{ display: "flex" }}>2,499 SF</span>
-          <span style={{ display: "flex" }}>4 BR</span>
-          <span style={{ display: "flex" }}>3 BA</span>
-          <span style={{ display: "flex" }}>Two residences</span>
+          <span style={{ display: "flex" }}>{PROPERTY.habitableArea.toLocaleString()} SF</span>
+          <span style={{ display: "flex" }}>{PROPERTY.bedrooms} BR</span>
+          <span style={{ display: "flex" }}>{PROPERTY.bathroomSummary}</span>
+          <span style={{ display: "flex" }}>2 condos</span>
         </div>
       </div>
     ),

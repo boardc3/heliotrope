@@ -7,7 +7,7 @@ const cards = [
   {
     bucket: "great-room",
     slug: "gr-01",
-    area: "Unit A",
+    area: "Unit A · Front",
     title: "Great Room Hearth",
     materials: "white oak · plaster · soft daylight",
     span: "lg:col-span-7 lg:row-span-2 aspect-[4/5] lg:aspect-auto",
@@ -31,25 +31,25 @@ const cards = [
   {
     bucket: "bedrooms",
     slug: "bed-01",
-    area: "Primary Suite",
+    area: "Unit A · Primary",
     title: "Primary Retreat",
-    materials: "wood ceiling · built-ins · private deck connection",
+    materials: "second floor · wood ceiling · terrace connection",
     span: "lg:col-span-7 aspect-[4/3]",
   },
   {
     bucket: "bedrooms",
     slug: "bed-02",
-    area: "Bedroom Suite",
+    area: "Unit A · Bedroom",
     title: "Built-In Retreat",
-    materials: "storage wall · reading bench · warm evening light",
+    materials: "second floor · storage wall · warm evening light",
     span: "lg:col-span-5 aspect-[4/3]",
   },
   {
     bucket: "dining",
     slug: "dn-05",
-    area: "Unit B",
-    title: "Second Residence",
-    materials: "warm neutrals · independent flexibility",
+    area: "Unit B · Rear",
+    title: "Rear Condo Living",
+    materials: "carriage-style · warm neutrals · sold separately",
     span: "lg:col-span-7 aspect-[4/3]",
   },
 ];
@@ -66,8 +66,8 @@ export function InteriorGallery() {
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
-            Stone, millwork, lighting, fixtures, and natural textures are presented as one cohesive material story,
-            not a menu of disconnected buyer decisions.
+            Stone, millwork, lighting, fixtures, and natural textures carry through both condos as one cohesive material
+            story — from the front residence to the rear carriage-style unit.
           </p>
         </div>
 

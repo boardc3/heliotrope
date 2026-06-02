@@ -20,9 +20,9 @@ const inter = Inter({
   weight: ["300", "400", "500"],
 });
 
-const title = `${ADDRESS} · A Corona del Mar Duplex Buyer Package`;
+const title = `${ADDRESS} · Two Connected Corona del Mar Condos`;
 const description =
-  "A refreshed cinematic showcase for 437 Heliotrope Avenue in Corona del Mar: a two-residence coastal property with village walkability, a completed design package, and Newport Beach context.";
+  "Two connected Corona del Mar condos sold separately at 437 Heliotrope Avenue: five bedrooms, six bathrooms, 3,119 SF habitable on a 3,540 SF lot — with village walkability and a completed buyer package.";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -43,11 +43,12 @@ export const metadata: Metadata = {
   keywords: [
     "437 Heliotrope",
     "437 Heliotrope Avenue",
-    "Corona del Mar duplex",
+    "Corona del Mar condos",
+    "connected condos Corona del Mar",
     "Corona del Mar real estate",
     "Newport Beach coastal property",
     "CdM village property",
-    "two unit Corona del Mar",
+    "two condos sold separately",
     "Heliotrope Avenue Corona del Mar",
   ],
   authors: [{ name: SITE_NAME }],

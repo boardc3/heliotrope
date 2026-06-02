@@ -1,8 +1,14 @@
 const pillars = [
-  ["Two-Residence Flexibility", "The package frames Unit A and Unit B as a useful coastal compound, not just extra square footage."],
+  [
+    "Two Connected Condos",
+    "Two condos on one 3,540-square-foot lot — physically connected yet sold separately — maximizing density in Corona del Mar.",
+  ],
   ["Village Walkability", "Daily dining, errands, and beach rituals stay close to the front door."],
   ["Material Continuity", "Warm neutrals, stone, millwork, and soft coastal light carry through the visual story."],
-  ["Income Optionality", "The second residence supports guest use, long-term rental thinking, or extended-family flexibility."],
+  [
+    "Rear Condo Flexibility",
+    "The carriage-style rear condo supports guest use, rental income, extended family, or a private coastal base.",
+  ],
 ] as const;
 
 export function DesignVision() {
@@ -17,8 +23,8 @@ export function DesignVision() {
             </h2>
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-bone/72 md:text-[1.05rem] lg:pb-3">
-            The Heliotrope story now moves faster: the buyer sees the facts, the finished material direction,
-            the two-residence logic, and the village lifestyle before getting deep into the gallery.
+            The Heliotrope story now moves faster: the buyer sees the condo configuration, the finished material
+            direction, the front-and-rear unit logic, and the village lifestyle before getting deep into the gallery.
           </p>
         </div>
 

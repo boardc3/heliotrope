@@ -1,15 +1,19 @@
 import { Picture } from "./Picture";
+import { formatUnitBaths, UNITS } from "../data/property";
+
+const unitA = UNITS[0];
+const unitB = UNITS[1];
 
 const plans = [
   {
-    title: "Unit A Flow",
-    copy: "A larger primary residence story with living, dining, kitchen, bedroom, and terrace imagery organized for review.",
+    title: "Unit A · Front Condo",
+    copy: `The larger primary residence — ${unitA.habitableSqFt.toLocaleString()} SF habitable, ${unitA.bedrooms} bedrooms, ${formatUnitBaths(unitA.fullBaths, unitA.powderRooms)}. The master suite and two additional bedrooms are on the second floor, with living, dining, kitchen, and terrace imagery organized for review.`,
     image: { bucket: "great-room", slug: "gr-01" },
     href: "/docs/Design-Inspo-437-Heliotrope.pdf",
   },
   {
-    title: "Unit B Flexibility",
-    copy: "A second-residence reference for guest use, rental thinking, extended family, or a private coastal base.",
+    title: "Unit B · Rear Condo",
+    copy: `The carriage-style rear condo — ${unitB.habitableSqFt.toLocaleString()} SF habitable, ${unitB.bedrooms} bedrooms, ${formatUnitBaths(unitB.fullBaths, unitB.powderRooms)}. Both bedrooms are on the second floor. Connected to Unit A yet sold separately — ideal for guest use, rental income, extended family, or a private coastal base.`,
     image: { bucket: "adu", slug: "adu-01" },
     href: "/docs/Design-Inspo-437-Heliotrope.pdf",
   },
@@ -28,7 +32,8 @@ export function FloorPlans() {
           </div>
           <p className="max-w-xl text-base leading-[1.75] text-ink/68 lg:pb-3">
             The Heliotrope package pairs rendered imagery with a direct design reference so serious buyers can
-            understand the primary residence, Unit B, and overall material direction.
+            understand the front condo, the rear condo, and overall material direction — two connected units sold
+            separately on one village lot.
           </p>
         </div>
 

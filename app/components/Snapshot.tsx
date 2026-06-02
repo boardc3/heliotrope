@@ -2,7 +2,7 @@
 
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { snapshotStats } from "../data/property";
+import { formatUnitBaths, PROPERTY, snapshotStats, UNITS } from "../data/property";
 
 function Counter({ value, format }: { value: number; format: "int" | "decimal" | "decimal2" | "year" }) {
   const motionValue = useMotionValue(0);
@@ -37,9 +37,10 @@ export function Snapshot() {
           </div>
           <div className="lg:pb-3">
             <p className="max-w-xl text-base leading-[1.75] text-ink/68 md:text-[1.05rem]">
-              Public listing data describes the property as a four-bedroom, three-bath duplex with roughly 2,499 square
-              feet of living area, 3,485 square feet of total area, village proximity, separate-unit optionality,
-              and a clearer design package for serious buyers.
+              437 Heliotrope is two connected condos sold separately on a {PROPERTY.lotSqFt.toLocaleString()}
+              -square-foot lot in Corona del Mar — a larger primary residence in the front and a substantial
+              carriage-style unit in the rear. Together they offer five bedrooms, six bathrooms (four full and two
+              powder rooms), and {PROPERTY.habitableArea.toLocaleString()} square feet of combined habitable area.
             </p>
           </div>
         </div>
@@ -66,6 +67,52 @@ export function Snapshot() {
             </motion.div>
           ))}
         </div>
+
+        <div className="mt-16 grid gap-px overflow-hidden rounded-sm border border-line bg-line md:grid-cols-2">
+          {UNITS.map((unit, index) => (
+            <motion.article
+              key={unit.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.9, delay: 0.4 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-bone p-8 md:p-10"
+            >
+              <p className="eyebrow-plain text-ink/45">
+                {unit.label} · {unit.position}
+              </p>
+              <h3 className="mt-4 font-display text-[clamp(1.8rem,3vw,2.4rem)] font-light tracking-[-0.03em]">
+                {unit.description}
+              </h3>
+              <dl className="mt-6 grid gap-4 border-t border-line pt-6 sm:grid-cols-3">
+                <div>
+                  <dt className="text-[0.62rem] font-medium uppercase tracking-widest3 text-ink/45">Habitable</dt>
+                  <dd className="mt-2 font-display text-2xl font-light tracking-[-0.02em]">
+                    {unit.habitableSqFt.toLocaleString()} SF
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[0.62rem] font-medium uppercase tracking-widest3 text-ink/45">Bedrooms</dt>
+                  <dd className="mt-2 font-display text-2xl font-light tracking-[-0.02em]">{unit.bedrooms}</dd>
+                </div>
+                <div>
+                  <dt className="text-[0.62rem] font-medium uppercase tracking-widest3 text-ink/45">Bathrooms</dt>
+                  <dd className="mt-2 text-sm leading-6 text-ink/72">
+                    {formatUnitBaths(unit.fullBaths, unit.powderRooms)}
+                  </dd>
+                </div>
+              </dl>
+              <p className="mt-5 text-sm leading-6 text-ink/62">
+                <span className="font-medium text-ink/72">Layout:</span> {unit.layout}
+              </p>
+            </motion.article>
+          ))}
+        </div>
+
+        <p className="mt-10 max-w-3xl text-sm leading-7 text-ink/58">
+          This configuration maximizes density for a {PROPERTY.lotSqFt.toLocaleString()}-square-foot lot in Corona del
+          Mar — two condos that share a connection yet convey as separate interests, giving buyers a larger front
+          residence and a meaningful rear unit without sacrificing village walkability.
+        </p>
       </div>
     </section>
   );

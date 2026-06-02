@@ -1,6 +1,6 @@
 # 437 Heliotrope Showcase
 
-A cinematic single-page Next.js property showcase for **437 Heliotrope Avenue**, a two-residence Corona del Mar duplex.
+A cinematic single-page Next.js property showcase for **437 Heliotrope Avenue** — two connected Corona del Mar condos sold separately on a 3,540-square-foot village lot.
 
 ## Stack
 
@@ -38,5 +38,5 @@ The Mapbox token is read at runtime by the `NeighborhoodMap` component. Without 
 ## SEO
 
 - Full Next.js Metadata API title, description, OpenGraph, Twitter, Apple meta.
-- JSON-LD `@graph` covering `RealEstateListing`, `SingleFamilyResidence`, `Place`, `WebSite`, `WebPage`, `BreadcrumbList`.
+- JSON-LD `@graph` covering `RealEstateListing`, `ApartmentComplex`, `Place`, `WebSite`, `WebPage`, `BreadcrumbList`.
 - `app/robots.ts`, `app/sitemap.ts`, `app/manifest.ts`, `app/opengraph-image.tsx`, `app/twitter-image.tsx`, `app/icon.tsx`, `app/apple-icon.tsx` all prerendered static.

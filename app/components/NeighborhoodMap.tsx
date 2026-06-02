@@ -140,7 +140,7 @@ export function NeighborhoodMap() {
       <div style="background:#13110E;color:#F4EEDF;padding:22px 22px 20px">
         <p style="margin:0;font-family:var(--font-inter,system-ui);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#A85A2F">The Property</p>
         <h3 style="margin:10px 0 6px;font-family:var(--font-fraunces,serif);font-weight:300;font-size:24px;letter-spacing:-.02em">437 Heliotrope</h3>
-        <p style="margin:0;color:rgba(244,238,223,.72);font-size:14px;line-height:1.5">A two-residence Corona del Mar property in the village grid.</p>
+        <p style="margin:0;color:rgba(244,238,223,.72);font-size:14px;line-height:1.5">Two connected Corona del Mar condos — sold separately — on a 3,540 SF village lot.</p>
       </div>`);
     popups.current.property = propertyPopup;
     new mapboxgl.Marker({ element: prop })

@@ -63,8 +63,9 @@ export function Hero() {
           </div>
           <div className="flex max-w-xl flex-col gap-7 lg:items-end lg:text-right">
             <p className="text-[1.05rem] leading-[1.65] text-bone/82 md:text-lg">
-              437 Heliotrope is a two-residence Corona del Mar property with a refreshed cinematic package,
-              completed design direction, income flexibility, and the daily ease of village walkability.
+              437 Heliotrope is two connected Corona del Mar condos — sold separately, sharing one village
+              address — with five bedrooms across both units, a refreshed cinematic buyer package, and the daily
+              ease of walkable coastal living.
             </p>
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <a href="#property" className="btn-primary !bg-bone !text-ink hover:!bg-ember hover:!text-bone">

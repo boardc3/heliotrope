@@ -49,7 +49,8 @@ export function Inquiry() {
             </h2>
             <p className="mt-7 max-w-xl text-base leading-[1.75] text-bone/72">
               Request the planning context, design inspiration, cinematic gallery, listing details, and diligence notes
-              for the two-residence opportunity at 437 Heliotrope.
+              for the two connected condos at 437 Heliotrope — sold separately, designed as one compelling
+              village address.
             </p>
           </div>
 
@@ -67,7 +68,7 @@ export function Inquiry() {
             <div>
               <p className="eyebrow-plain text-bone/48">Quick Facts</p>
               <p className="mt-3 text-base leading-7 text-bone/85">
-                {PROPERTY.propertyType} · {PROPERTY.bedrooms} BR / {PROPERTY.bathrooms} BA
+                {PROPERTY.propertyType} · {PROPERTY.bedrooms} BR · {PROPERTY.bathroomSummary}
                 <br />
                 MLS {PROPERTY.mls}
               </p>

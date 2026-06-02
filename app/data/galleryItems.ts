@@ -23,5 +23,5 @@ export const galleryItems: GalleryItem[] = [
   { id: "kt-03", category: "Kitchen", title: "Chef's Kitchen", meta: "Stone counters · warm millwork", bucket: "kitchen", slug: "kt-03", alt: "Unit A kitchen render with stone island", aspect: "wide" },
   { id: "kt-04", category: "Kitchen", title: "Island Detail", meta: "Layered neutrals and integrated lighting", bucket: "kitchen", slug: "kt-04", alt: "Kitchen island and living space render", aspect: "wide" },
   { id: "bed-01", category: "Bedroom", title: "Primary Suite", meta: "Warm millwork · terrace light", bucket: "bedrooms", slug: "bed-01", alt: "Primary bedroom concept with warm millwork and terrace access", aspect: "wide" },
-  { id: "unitb", category: "Unit B", title: "Second Residence", meta: "Independent living with refined finishes", bucket: "adu", slug: "adu-01", alt: "Unit B interior render", aspect: "wide" },
+  { id: "unitb", category: "Unit B", title: "Rear Condo", meta: "Carriage-style · connected · sold separately", bucket: "adu", slug: "adu-01", alt: "Unit B rear condo interior render at 437 Heliotrope", aspect: "wide" },
 ];
